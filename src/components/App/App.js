@@ -11,7 +11,12 @@ import NothingFound from '../NothingFound/NothingFound';
 function App() {
   return (
     <>
+      <Header></Header>
+      <CardList></CardList>
+      <Preloader></Preloader>
       <NothingFound></NothingFound>
+      <About></About>
+      <Footer></Footer>
     </>
   )
 }
