@@ -5,8 +5,8 @@ import FormSection from '../FormSection/FormSection';
 function Header() {
   return (
     <header className="header">
-      <Navigation></Navigation>
-      <FormSection></FormSection>
+      <Navigation isLoggedIn={true} username='Elise' />
+      <FormSection />
     </header>
   )
 };

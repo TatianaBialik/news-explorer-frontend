@@ -8,24 +8,16 @@ import CardList from '../CardList/CardList';
 import Preloader from '../Preloader/Preloader';
 import NothingFound from '../NothingFound/NothingFound';
 import Popup from '../Popup/Popup';
+import PopupWithForm from '../PopupWithForm/PopupWithForm';
+import { NavLink } from 'react-router-dom';
+import LoginPopup from '../LoginPopup/LoginPopup';
+import RegisterPopup from '../RegisterPopup/RegisterPopup';
+import SuccessPopup from '../SuccessPopup/SuccessPopup';
+import SavedNews from '../SavedNews/SavedNews';
 
 function App() {
   return (
-    <>
-      <Header></Header>
-      <CardList></CardList>
-      <Preloader></Preloader>
-      <NothingFound></NothingFound>
-      <About></About>
-      <Footer></Footer>
-      <Popup name='Sign up' isOpen='true'>
-        <label className='popup__label'>Email</label>
-        <input type='text' className='popup__input' placeholder='Enter email'></input>
-        <span className="popup__error">ppp</span>
-        <label className='popup__label'>Password</label>
-        <input type='password' className='popup__input' placeholder='Enter password'></input>
-      </Popup>
-    </>
+    <SavedNews />
   )
 }
 
