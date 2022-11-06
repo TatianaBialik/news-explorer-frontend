@@ -1,9 +1,10 @@
 import './SavedNews.css';
 import SavedNewsHeader from '../SavedNewsHeader/SavedNewsHeader';
+import { articles } from '../../utils/temp_consts';
 
 function SavedNews() {
   return (
-    <SavedNewsHeader />
+    <SavedNewsHeader username='Elise' articles={articles} />
   )
 }
 
