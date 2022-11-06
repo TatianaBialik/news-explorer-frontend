@@ -17,9 +17,7 @@
   margin: 0;
 }
 
-.card__save-button {
-  background: url('../../images/bookmark.svg') no-repeat center;
-  background-color: #FFFFFF;
+.card__button {
   max-width: 40px;
   width: 100%;
   min-height: 40px;
@@ -32,26 +30,60 @@
   transition: all 0.3s;
 }
 
-.card__save-button:hover {
+.card__button_save {
+  background: url('../../images/bookmark.svg') no-repeat center;
+  background-color: #FFFFFF;
+}
+
+.card__button_save:hover {
   background: url('../../images/bookmark_hover.svg') no-repeat center;
   background-color: #FFFFFF;
 }
 
-.card__sign-label {
-  position: absolute;
-  top: 24px;
-  right: 69px;
+.card__button_delete {
+  background: url('../../images/trash.svg') no-repeat center;
+  background-color: #FFFFFF;
+}
+
+.card__button_delete:hover {
+  background: url('../../images/trash_black.svg') no-repeat center;
+  background-color: #FFFFFF;
+}
+
+.card__button:hover + .card__label_sign-in {
+  visibility: visible;
+  display: flex;
+  align-items: center;
+  opacity: 1;
+}
+
+.card__label {
   margin: 0;
   background-color: #FFFFFF;
   padding: 0 20px;
   border-radius: 10px;
   min-height: 40px;
-  display: none;
-  visibility: hidden;
 }
 
-.card__sign-label_visible {
+.card__label_visible {
   visibility: visible;
+  display: flex;
+  align-items: center;
+}
+
+.card__label_sign-in {
+  position: absolute;
+  top: 24px;
+  right: 69px;
+  display: none;
+  visibility: hidden;
+  opacity: 0;
+}
+
+.card__label_keyword {
+  position: absolute;
+  top: 24px;
+  left: 24px;
   display: flex;
   align-items: center;
 }

@@ -1,8 +1,11 @@
 import './CardList.css';
 import Card from '../Card/Card';
-import { articles } from '../../utils/temp_consts';
+import { useLocation } from 'react-router-dom';
+
 
 function CardList({ articles }) {
+  const location = useLocation();
+
   return (
     <section className='cardlist'>
       <h2 className="cardlist__title">Search results</h2>
