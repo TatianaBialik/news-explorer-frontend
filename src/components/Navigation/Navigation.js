@@ -11,8 +11,8 @@ function Navigation({ isLoggedIn, username }) {
     <div className="navigation">
       <p className={`navigation__logo navigation__logo` + navClass}>NewsExplorer</p>
       <nav className="navigation__links">
-        <NavLink className={`navigation__link navigation__link` + navClass}>Home</NavLink>
-        <NavLink className={`navigation__link navigation__link` + navClass}>Saved articles</NavLink>
+        <NavLink to='/' className={`navigation__link navigation__link` + navClass}>Home</NavLink>
+        <NavLink to='/saved' className={`navigation__link navigation__link` + navClass}>Saved articles</NavLink>
         { isLoggedIn ? (
           <button className={`navigation__header-button navigation__header-button_logout navigation__header-button` + navClass}>
             { username }

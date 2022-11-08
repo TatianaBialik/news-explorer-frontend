@@ -9,15 +9,27 @@ import Preloader from '../Preloader/Preloader';
 import NothingFound from '../NothingFound/NothingFound';
 import Popup from '../Popup/Popup';
 import PopupWithForm from '../PopupWithForm/PopupWithForm';
-import { NavLink } from 'react-router-dom';
+import { Route, Routes, Redirect, useHistory } from 'react-router-dom';
 import LoginPopup from '../LoginPopup/LoginPopup';
 import RegisterPopup from '../RegisterPopup/RegisterPopup';
 import SuccessPopup from '../SuccessPopup/SuccessPopup';
 import SavedNews from '../SavedNews/SavedNews';
+import { useState } from 'react';
 
 function App() {
+  const [isLoginPopupOpen, setIsLoginPopupOpen] = useState(false);
+  const [isRegisterPopupOpen, setIsRegisterPopupOpen] = useState(false);
+
   return (
-    <SavedNews />
+    <div className="page">
+      <Routes>
+        <Route path='/' element={<Main />} />
+        <Route path='/saved' element={<SavedNews />} />
+      </Routes>
+      
+      <LoginPopup />
+      <RegisterPopup />
+    </div>
   )
 }
 
