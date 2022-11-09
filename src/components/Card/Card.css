@@ -154,3 +154,16 @@
   bottom: 24px;
 }
 
+@media screen and (max-width: 992px) {
+  .card__image {
+    max-height: 150px;
+  }
+
+  .card__text {
+    -webkit-line-clamp: 4;
+  }
+
+  .card__title {
+    font-size: 22px;
+  }
+}

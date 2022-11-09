@@ -45,3 +45,36 @@
 .cardlist__show-more-button:hover {
   opacity: 0.9;
 }
+
+@media screen and (max-width: 992px) {
+  .cardlist {
+    padding: 40px;
+  }
+
+  .cardlist__list {
+    column-gap: 8px;
+    row-gap: 8px;
+    grid-auto-rows: minmax(420px, auto);
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .cardlist {
+    padding: 32px 16px;
+    row-gap: 0;
+  }
+
+  .cardlist__list {
+    grid-template-columns: 1fr;
+    margin-top: 58px;
+  }
+
+  .cardlist__show-more-button {
+    padding: 16px 99px 16px 98px;
+    margin-top: 16px;
+  }
+
+  .cardlist__title {
+    font-size: 30px;
+  }
+}
