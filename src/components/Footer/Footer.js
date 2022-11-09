@@ -20,7 +20,7 @@ function Footer() {
           <a href="https://github.com/TatianaBialik" className="footer__github">
             <img className="footer__github-icon" src={githubIcon} />
           </a>
-          <a href="https://www.facebook.com/tiana.tana/" className="footer__facebook">
+          <a href="https://www.facebook.com/tiana.tana/" className="footer__facebook" target='_blank'>
             <img className="footer__facebook-icon" src={fbIcon} />
           </a>
         </div>

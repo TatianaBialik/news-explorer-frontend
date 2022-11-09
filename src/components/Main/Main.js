@@ -4,10 +4,10 @@ import About from '../About/About';
 import Footer from '../Footer/Footer';
 import { articles } from '../../utils/temp_consts';
 
-function Main() {
+function Main({ isLoggedIn, username, onSignInClick }) {
   return (
     <main className="main">
-      <Header isLoggedIn='false' username='Elise' />
+      <Header isLoggedIn={isLoggedIn} username={username} onSignInClick={onSignInClick} />
       <CardList articles={articles} />
       <About />
       <Footer />

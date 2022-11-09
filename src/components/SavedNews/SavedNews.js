@@ -5,10 +5,10 @@ import CardList from '../CardList/CardList';
 import Footer from '../Footer/Footer';
 import SavedCardsList from '../SavedCardsList/SavedCardsList';
 
-function SavedNews() {
+function SavedNews({ username }) {
   return (
     <>
-      <SavedNewsHeader username='Elise' articles={articles} />
+      <SavedNewsHeader username={username} articles={articles} />
       <SavedCardsList articles={ articles} />
       <Footer />
     </>

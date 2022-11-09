@@ -1,10 +1,16 @@
 import PopupWithForm from '../PopupWithForm/PopupWithForm';
 
 function RegisterPopup({
-  isOpen
+  isOpen,
+  onClose,
+  onSignInClick
 }) {
   return (
-    <PopupWithForm name='Sign up' isOpen={isOpen}>
+    <PopupWithForm 
+      name='Sign up' 
+      isOpen={isOpen} 
+      onClose={onClose}
+      onSignInClick={onSignInClick}>
       <label className='form__label'>Email</label>
       <input type='text' className='form__input' placeholder='Enter email'></input>
       <span className="form__error email-error">Invalid email address</span>
