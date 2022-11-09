@@ -167,3 +167,25 @@
     font-size: 22px;
   }
 }
+
+@media screen and (max-width: 600px) {
+  .card {
+    max-width: 80%;
+    margin: 0 auto;
+    align-self: flex-start;
+  }
+
+  .card__description {
+    min-height: 280px;
+  }
+
+  .card__image {
+    max-height: 196px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .card {
+    max-width: 100%;
+  }  
+}
