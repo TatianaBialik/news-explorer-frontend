@@ -45,19 +45,8 @@
   .search-form {
     max-width: 400px;
     margin: 48px 0 0;
-    /* align-items: left; */
   }
 }
-
-/* @media screen and (max-width: 500px) {
-  .search-form {
-    max-width: 87%;
-  }
-
-  .search-form__submit-button {
-    max-width: 40%;
-  }
-} */
 
 @media screen and (max-width: 500px) {
   .search-form {
@@ -69,7 +58,6 @@
   }
 
   .search-form__input {
-    /* max-width: 88%; */
     width: calc(100% - 32px);
     margin: 0 auto;
     padding: 17px 16px;
@@ -78,7 +66,6 @@
   .search-form__submit-button {
     position: static;
     width: 100%;
-    /* width: 100%; */
     margin: 0 auto;
     padding: 16px auto;
   }

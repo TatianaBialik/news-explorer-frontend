@@ -21,13 +21,11 @@
 .footer__links {
   display: flex;
   column-gap: 35px;
-  /* align-items: center; */
 }
 
 .footer__link {
   text-decoration: none;
   color: #1A1B22;
-  /* align-self: center; */
 }
 
 .footer__external-resources {

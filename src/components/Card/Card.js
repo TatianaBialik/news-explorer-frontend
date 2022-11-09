@@ -6,7 +6,10 @@ function Card({ card }) {
 
   return (
     <li className="card">
-      <img className="card__image" src={ card.image }/>
+      <img 
+        className="card__image" 
+        src={ card.image }
+        alt={`The ${card.title} article illustration`}/>
       {location.pathname === '/' ? (
         <button className="card__button card__button_save" />
       ) : (

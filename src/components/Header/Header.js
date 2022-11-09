@@ -5,7 +5,10 @@ import FormSection from '../FormSection/FormSection';
 function Header({ isLoggedIn, username, onSignInClick }) {
   return (
     <header className="header">
-      <Navigation isLoggedIn={isLoggedIn} username={username} onSignInClick={onSignInClick} />
+      <Navigation 
+        isLoggedIn={isLoggedIn} 
+        username={username} 
+        onSignInClick={onSignInClick} />
       <FormSection />
     </header>
   )

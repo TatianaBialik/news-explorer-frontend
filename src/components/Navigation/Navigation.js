@@ -24,23 +24,23 @@ function Navigation({ isLoggedIn, username, onSignInClick }) {
         /* OPEN MOBILE NAVIGATION MENU */
         <div className="navigation__burger">
           <div className="navigation__top">
-            <p className={`navigation__logo navigation__logo`}>NewsExplorer</p>
+            <p className={`navigation__logo`}>NewsExplorer</p>
             <button className="navigation__close-menu-button" onClick={handleCloseMenuClick} />
           </div>
           
           <div className="navigation__links_active">
-            <NavLink to='/' className={`navigation__link navigation__link`}>Home</NavLink>
-            <NavLink to='/saved' className={`navigation__link navigation__link`}>Saved articles</NavLink>
+            <NavLink to='/' className='navigation__link'>Home</NavLink>
+            <NavLink to='/saved' className='navigation__link'>Saved articles</NavLink>
 
             { isLoggedIn ? (
-              <button className={`navigation__header-button navigation__header-button_logout navigation__header-button`}>
+              <button className={`navigation__header-button navigation__header-button_function_logout`}>
                 { username }
                 <img src={ logout_white } />
               </button>
               ) : (
                 <button 
                   type='button'
-                  className={`navigation__header-button navigation__header-button_login navigation__header-button`}
+                  className={`navigation__header-button navigation__header-button_function_login`}
                   onClick={onSignInClick}>Sign in</button>
               )}
           </div>
@@ -60,7 +60,7 @@ function Navigation({ isLoggedIn, username, onSignInClick }) {
         { isLoggedIn ? (
           <>
             <NavLink to='/saved' className={`${navClass === '_saved' && 'navigation__link_location'} navigation__link navigation__link` + navClass}>Saved articles</NavLink>
-            <button className={`navigation__header-button navigation__header-button_logout navigation__header-button` + navClass}>
+            <button className={`navigation__header-button navigation__header-button_function_logout navigation__header-button` + navClass}>
               { username }
               <img src={ location.pathname === '/' ? logout_white : logout_black } />
             </button>
@@ -68,7 +68,7 @@ function Navigation({ isLoggedIn, username, onSignInClick }) {
         ) : (
           <button 
           type='button'
-          className={`navigation__header-button navigation__header-button_login navigation__header-button` + navClass}
+          className={`navigation__header-button navigation__header-button_function_login navigation__header-button` + navClass}
           onClick={onSignInClick}>Sign in</button>
         )}
       </nav>

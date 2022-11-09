@@ -41,18 +41,15 @@
   font-family: 'Inter', sans-serif;
   font-size: 12px;
   line-height: 1.2;
-  /* margin-bottom: 9px; */
 }
 
 .form__input {
   border: none;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-  /* opacity: 0.2; */
   padding: 9px 0;
   font-family: 'Inter', sans-serif;
   font-size: 14px;
   line-height: 1.2;
-  /* margin-bottom: 39px; */
   width: 100%;
   outline: none;
 }
@@ -65,14 +62,6 @@
 .form__input:focus {
   border-bottom: 1px solid #000;
 }
-
-/* .form__input_position_first {
-
-}
-
-.form__input_position_next {
-
-} */
 
 .form__error {
   color: #FF0000;

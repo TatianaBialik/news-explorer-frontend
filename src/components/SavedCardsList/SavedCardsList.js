@@ -1,4 +1,3 @@
-import './SavedCardsList.css';
 import Card from '../Card/Card';
 
 function SavedCardsList({articles}) {

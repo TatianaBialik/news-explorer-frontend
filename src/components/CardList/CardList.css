@@ -67,7 +67,6 @@
   .cardlist__list {
     grid-template-columns: 1fr;
     grid-auto-rows: minmax(440px, auto);
-    /* margin-top: 58px; */
   }
 
   .cardlist__show-more-button {

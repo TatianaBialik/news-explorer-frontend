@@ -17,7 +17,7 @@ function Footer() {
           </a>
         </div>
         <div className="footer__external-resources">
-          <a href="https://github.com/TatianaBialik" className="footer__github">
+          <a href="https://github.com/TatianaBialik" className="footer__github" target='_blank'>
             <img className="footer__github-icon" src={githubIcon} />
           </a>
           <a href="https://www.facebook.com/tiana.tana/" className="footer__facebook" target='_blank'>
