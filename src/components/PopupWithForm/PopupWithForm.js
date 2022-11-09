@@ -11,6 +11,7 @@ function PopupWithForm({
     <Popup isOpen={isOpen} name={name}>
       <form className="form">
         {children}
+        <span className="form__error form__error_common">ppp</span>
         <button className="form__submit-button">{name}</button>
       </form>
       <p className="form__subtext">

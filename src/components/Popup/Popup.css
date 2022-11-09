@@ -52,6 +52,21 @@
   cursor: pointer;
 }
 
+@media screen and (max-width: 500px) {
+  .popup__box {
+    max-width: 100%;
+    height: calc(100vh - 150px);
+  }
+
+  .popup__close-button {
+    width: 24px;
+    height: 24px;
+    background-size: contain;
+    top: -40px;
+    right: 8px;
+  }
+}
+
 
 
 

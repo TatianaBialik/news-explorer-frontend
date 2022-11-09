@@ -52,7 +52,7 @@
   font-family: 'Inter', sans-serif;
   font-size: 14px;
   line-height: 1.2;
-  margin-bottom: 39px;
+  /* margin-bottom: 39px; */
   width: 100%;
   outline: none;
 }
@@ -64,6 +64,33 @@
 
 .form__input:focus {
   border-bottom: 1px solid #000;
+}
+
+/* .form__input_position_first {
+
+}
+
+.form__input_position_next {
+
+} */
+
+.form__error {
+  color: #FF0000;
+  font-size: 12px;
+  line-height: 1.2;
+  font-family: 'Inter', sans-serif;
+  display: block;
+  margin-bottom: 13px;
+  visibility: hidden;
+}
+
+.form__error_visible {
+  visibility: visible;
+}
+
+.form__error_common {
+  margin-bottom: 8px;
+  text-align: center;
 }
 
 .form__subtext {

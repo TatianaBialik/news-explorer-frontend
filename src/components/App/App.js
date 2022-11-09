@@ -17,8 +17,9 @@ import SavedNews from '../SavedNews/SavedNews';
 import { useState } from 'react';
 
 function App() {
-  const [isLoginPopupOpen, setIsLoginPopupOpen] = useState(false);
+  const [isLoginPopupOpen, setIsLoginPopupOpen] = useState(true);
   const [isRegisterPopupOpen, setIsRegisterPopupOpen] = useState(false);
+  const [isSuccessPopupOpen, setIsSuccessPopupOpen] = useState(false);
 
   return (
     <div className="page">
@@ -27,8 +28,9 @@ function App() {
         <Route path='/saved' element={<SavedNews />} />
       </Routes>
       
-      <LoginPopup />
-      <RegisterPopup />
+      <LoginPopup isOpen={isLoginPopupOpen} />
+      <RegisterPopup isOpen={isRegisterPopupOpen} />
+      <isSuccessPopupOpen isOpen={isSuccessPopupOpen} />
     </div>
   )
 }

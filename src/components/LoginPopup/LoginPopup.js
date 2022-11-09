@@ -7,9 +7,10 @@ function LoginPopup({
     <PopupWithForm name='Sign in' isOpen={isOpen}>
       <label className='form__label'>Email</label>
       <input type='text' className='form__input' placeholder='Enter email'></input>
-      <span className="form__error">ppp</span>
+      <span className="form__error email-error">Invalid email address</span>
       <label className='form__label'>Password</label>
       <input type='password' className='form__input' placeholder='Enter password'></input>
+      <span className="form__error password-error">Invalid password</span>
     </PopupWithForm>
   )
 };
