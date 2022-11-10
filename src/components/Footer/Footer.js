@@ -13,16 +13,25 @@ function Footer() {
           <a 
             href="https://practicum.com/en-isr" 
             className="footer__link"
-            target='_blank'>
+            target='_blank'
+            rel="noopener noreferrer">
               Practicum by Yandex
           </a>
         </div>
         <div className="footer__external-resources">
-          <a href="https://github.com/TatianaBialik" className="footer__github" target='_blank'>
-            <img className="footer__github-icon" src={githubIcon} />
+          <a 
+            href="https://github.com/TatianaBialik" 
+            className="footer__github" 
+            target='_blank' 
+            rel="noopener noreferrer">
+            <img className="footer__github-icon" src={githubIcon} alt='Github' />
           </a>
-          <a href="https://www.facebook.com/tiana.tana/" className="footer__facebook" target='_blank'>
-            <img className="footer__facebook-icon" src={fbIcon} />
+          <a 
+            href="https://www.facebook.com/tiana.tana/" 
+            className="footer__facebook" 
+            target='_blank' 
+            rel="noopener noreferrer">
+            <img className="footer__facebook-icon" src={fbIcon} alt='Facebook' />
           </a>
         </div>
       </div>
