@@ -7,7 +7,7 @@ function Footer() {
   return (
     <footer className="footer">
       <p className="footer__copyright">&#169; {new Date().getFullYear()} Supersite, Powered by News API</p>
-      <div className="footer__navigation">
+      <nav className="footer__navigation">
         <div className="footer__links">
           <NavLink to='/' className="footer__link">Home</NavLink>
           <a 
@@ -34,7 +34,7 @@ function Footer() {
             <img className="footer__facebook-icon" src={fbIcon} alt='Facebook' />
           </a>
         </div>
-      </div>
+      </nav>
     </footer>
   )
 }

@@ -3,7 +3,7 @@ import './SearchForm.css';
 function SearchForm() {
   return (
     <form className="search-form">
-      <input className='search-form__input' type="text" placeholder="Enter topic"></input>
+      <input className='search-form__input' type="text" placeholder="Enter topic" required></input>
       <button className='search-form__submit-button'>Search</button>
     </form>
   )

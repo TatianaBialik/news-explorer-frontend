@@ -1,4 +1,4 @@
-export const articles = [
+export const cards = [
   {
     keyword: 'Nature',
     title: `Everyone Needs a Special 'Sit Spot' in Nature`,

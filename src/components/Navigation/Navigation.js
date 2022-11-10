@@ -35,7 +35,7 @@ function Navigation({ isLoggedIn, username, onSignInClick }) {
             { isLoggedIn ? (
               <button className={`navigation__header-button navigation__header-button_function_logout`}>
                 { username }
-                <img src={ logout_white } />
+                <img src={ logout_white } alt='Exit icon' />
               </button>
               ) : (
                 <button 
@@ -62,7 +62,7 @@ function Navigation({ isLoggedIn, username, onSignInClick }) {
             <NavLink to='/saved-news' className={`${navClass === '_saved' && 'navigation__link_location'} navigation__link navigation__link` + navClass}>Saved articles</NavLink>
             <button className={`navigation__header-button navigation__header-button_function_logout navigation__header-button` + navClass}>
               { username }
-              <img src={ location.pathname === '/' ? logout_white : logout_black } />
+              <img src={ location.pathname === '/' ? logout_white : logout_black } alt='Exit icon' />
             </button>
           </>
         ) : (

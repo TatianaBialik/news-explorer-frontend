@@ -1,9 +1,9 @@
 .cardlist {
   background-color: #F5F6F7;
-  padding: 80px 104px;
   display: grid;
   row-gap: 64px;
   align-items: center;
+  padding: 80px calc(104px + ((100% - 1440px) / 2));
 }
 
 .cardlist__title {
@@ -28,7 +28,7 @@
 .cardlist__show-more-button {
   padding: 20px 99px;
   max-width: 289px;
-  background-color: #fff;
+  background-color: #FFF;
   color: #1A1B22;
   font-family: 'Roboto', sans-serif;
   font-weight: 500;
@@ -41,6 +41,7 @@
   cursor: pointer;
 }
 
+/* HOVER EFFECT FOR BUTTON ACCORDING FIGMA LAYOUT */
 .cardlist__show-more-button:hover {
   opacity: 0.9;
 }
@@ -54,6 +55,12 @@
     column-gap: 8px;
     row-gap: 8px;
     grid-auto-rows: minmax(420px, auto);
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .cardlist__list {
+    grid-template-columns: repeat(2,1fr);
   }
 }
 

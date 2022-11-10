@@ -1,6 +1,6 @@
 .card {
   max-height: 100%;
-  max-width: 100%;
+  max-width: 400px;
   cursor: pointer;
   position: relative;
 }
@@ -28,27 +28,32 @@
   transition: all 0.3s;
 }
 
-.card__button_save {
+.card__button_type_save {
   background: url('../../images/bookmark.svg') no-repeat center;
   background-color: #FFFFFF;
 }
 
-.card__button_save:hover {
+.card__button_type_save:hover {
   background: url('../../images/bookmark_hover.svg') no-repeat center;
   background-color: #FFFFFF;
 }
 
-.card__button_delete {
+.card__button_type_saved {
+  background: url('../../images/bookmark_saved.svg') no-repeat center;
+  background-color: #FFFFFF;
+}
+
+.card__button_type_delete {
   background: url('../../images/trash.svg') no-repeat center;
   background-color: #FFFFFF;
 }
 
-.card__button_delete:hover {
+.card__button_type_delete:hover {
   background: url('../../images/trash_black.svg') no-repeat center;
   background-color: #FFFFFF;
 }
 
-.card__button:hover + .card__label_sign-in {
+.card__button:hover + .card__label_type_sign-in {
   visibility: visible;
   display: flex;
   align-items: center;
@@ -69,7 +74,7 @@
   align-items: center;
 }
 
-.card__label_sign-in {
+.card__label_type_sign-in {
   position: absolute;
   top: 24px;
   right: 69px;
@@ -78,7 +83,7 @@
   opacity: 0;
 }
 
-.card__label_keyword {
+.card__label_type_keyword {
   position: absolute;
   top: 24px;
   left: 24px;
@@ -101,7 +106,6 @@
   padding: 20px 24px 24px;
   min-height: 304px;
   position: relative;
-  
 }
 
 .card__date {
@@ -134,7 +138,7 @@
 
 .card__source {
   margin: 0;
-  font-family: 'Roboto Slab';
+  font-family: 'Roboto Slab', serif;
   font-weight: 700;
   font-size: 16px;
   line-height: 1.2;
@@ -152,6 +156,9 @@
 }
 
 @media screen and (max-width: 992px) {
+  .card__description {
+    padding: 16px 16px 26px;
+  }
   .card__image {
     max-height: 150px;
   }

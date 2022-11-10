@@ -9,7 +9,7 @@
 }
 
 .nothing-found__title {
-  font-family: 'Roboto Slab';
+  font-family: 'Roboto Slab', serif;
   font-size: 26px;
   line-height: 1.2;
   text-align: center;
@@ -19,7 +19,7 @@
 
 .nothing-found__text {
   color: #B6BCBF;
-  font-family: 'Roboto';
+  font-family: 'Roboto', sans-serif;
   font-size: 18px;
   line-height: 1.3;
   text-align: center;

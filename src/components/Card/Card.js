@@ -11,12 +11,12 @@ function Card({ card }) {
         src={ card.image }
         alt={`The ${card.title} article illustration`}/>
       {location.pathname === '/' ? (
-        <button className="card__button card__button_save" />
+        <button className="card__button card__button_type_save" />
       ) : (
-        <button className="card__button card__button_delete" />
+        <button className="card__button card__button_type_delete" />
       )}
       
-      <div className="card__label card__label_sign-in">
+      <div className="card__label card__label_type_sign-in">
         <p className="card__label-text">
           {location.pathname === '/' ? (
             'Sign to save articles'
@@ -26,7 +26,7 @@ function Card({ card }) {
         </p>
       </div>
       {location.pathname === '/saved-news' && (
-        <div className="card__label card__label_keyword">
+        <div className="card__label card__label_type_keyword">
           <p className="card__label-text">{ card.keyword }</p>
         </div>
       )}

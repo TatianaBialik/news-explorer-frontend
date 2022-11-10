@@ -1,6 +1,7 @@
 .header {
   background: url(../../images/background.png) no-repeat;
   background-size: cover;
+  padding: 0 calc((100% - 1440px) / 2) 0;
 }
 
 @media screen and (max-width: 600px) {

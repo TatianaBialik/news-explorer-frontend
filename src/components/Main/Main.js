@@ -2,13 +2,28 @@ import Header from '../Header/Header';
 import CardList from '../CardList/CardList';
 import About from '../About/About';
 import Footer from '../Footer/Footer';
-import { articles } from '../../utils/temp_consts';
+import Preloader from '../Preloader/Preloader';
+import NothingFound from '../NothingFound/NothingFound';
 
-function Main({ isLoggedIn, username, onSignInClick }) {
+function Main({ 
+  isLoggedIn, 
+  username, 
+  onSignInClick,
+  isLoading,
+  articles
+ }) {
   return (
     <main className="main">
       <Header isLoggedIn={isLoggedIn} username={username} onSignInClick={onSignInClick} />
-      <CardList articles={articles} />
+      {isLoading && (
+        <Preloader />
+      )}
+      {articles.length === 0 ? (
+        <NothingFound />
+      ) : (
+        <CardList articles={articles} />
+      )}
+      
       <About />
       <Footer />
     </main>

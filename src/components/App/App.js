@@ -6,12 +6,15 @@ import LoginPopup from '../LoginPopup/LoginPopup';
 import RegisterPopup from '../RegisterPopup/RegisterPopup';
 import SuccessPopup from '../SuccessPopup/SuccessPopup';
 import SavedNews from '../SavedNews/SavedNews';
+import { cards } from '../../utils/temp_consts';
 
 function App() {
   const [isLoginPopupOpen, setIsLoginPopupOpen] = useState(false);
   const [isRegisterPopupOpen, setIsRegisterPopupOpen] = useState(false);
   const [isSuccessPopupOpen, setIsSuccessPopupOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [articles, setArticles] = useState(cards);
 
   const handleSignInButtonClick = () => {
     setIsLoginPopupOpen(true);
@@ -38,9 +41,11 @@ function App() {
             <Main 
               isLoggedIn={isLoggedIn} 
               username={username}
-              onSignInClick={handleSignInButtonClick} />
+              onSignInClick={handleSignInButtonClick}
+              isLoading={isLoading}
+              articles={articles} />
             } />
-        <Route path='/saved-news' element={<SavedNews username={username} />} />
+        <Route path='/saved-news' element={<SavedNews username={username} articles={articles} />} />
       </Routes>
       
       <LoginPopup isOpen={isLoginPopupOpen} onClose={closeAllPopups} onSignUpClick={handleSignUpClick} />
