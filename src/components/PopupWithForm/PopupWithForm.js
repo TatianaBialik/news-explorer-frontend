@@ -34,7 +34,7 @@ function PopupWithForm({
           className="form__link" 
           onClick={name === 'Sign in' ? handleSignUpClick : handleSignInClick}>
             {name === 'Sign in' ? 'Sign up' : 'Sign in'}
-          </NavLink>
+        </NavLink>
       </p>
     </Popup>
   )

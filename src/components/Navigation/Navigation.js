@@ -30,7 +30,7 @@ function Navigation({ isLoggedIn, username, onSignInClick }) {
           
           <div className="navigation__links_active">
             <NavLink to='/' className='navigation__link'>Home</NavLink>
-            <NavLink to='/saved' className='navigation__link'>Saved articles</NavLink>
+            <NavLink to='/saved-news' className='navigation__link'>Saved articles</NavLink>
 
             { isLoggedIn ? (
               <button className={`navigation__header-button navigation__header-button_function_logout`}>
@@ -59,7 +59,7 @@ function Navigation({ isLoggedIn, username, onSignInClick }) {
         
         { isLoggedIn ? (
           <>
-            <NavLink to='/saved' className={`${navClass === '_saved' && 'navigation__link_location'} navigation__link navigation__link` + navClass}>Saved articles</NavLink>
+            <NavLink to='/saved-news' className={`${navClass === '_saved' && 'navigation__link_location'} navigation__link navigation__link` + navClass}>Saved articles</NavLink>
             <button className={`navigation__header-button navigation__header-button_function_logout navigation__header-button` + navClass}>
               { username }
               <img src={ location.pathname === '/' ? logout_white : logout_black } />

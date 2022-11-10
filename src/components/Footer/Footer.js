@@ -12,7 +12,8 @@ function Footer() {
           <NavLink to='/' className="footer__link">Home</NavLink>
           <a 
             href="https://practicum.com/en-isr" 
-            className="footer__link">
+            className="footer__link"
+            target='_blank'>
               Practicum by Yandex
           </a>
         </div>

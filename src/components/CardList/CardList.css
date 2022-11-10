@@ -20,7 +20,6 @@
   padding: 0;
   display: grid;
   grid-template-columns: repeat(3,1fr);
-  /* grid-auto-rows: 576px; */
   grid-auto-rows: minmax(576px, auto);
   column-gap: 16px;
   row-gap: 16px;

@@ -11,6 +11,7 @@ function App() {
   const [isLoginPopupOpen, setIsLoginPopupOpen] = useState(false);
   const [isRegisterPopupOpen, setIsRegisterPopupOpen] = useState(false);
   const [isSuccessPopupOpen, setIsSuccessPopupOpen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const handleSignInButtonClick = () => {
     setIsLoginPopupOpen(true);
@@ -35,11 +36,11 @@ function App() {
           path='/' 
           element={
             <Main 
-              isLoggedIn={false} 
+              isLoggedIn={isLoggedIn} 
               username={username}
               onSignInClick={handleSignInButtonClick} />
             } />
-        <Route path='/saved' element={<SavedNews username={username} />} />
+        <Route path='/saved-news' element={<SavedNews username={username} />} />
       </Routes>
       
       <LoginPopup isOpen={isLoginPopupOpen} onClose={closeAllPopups} onSignUpClick={handleSignUpClick} />

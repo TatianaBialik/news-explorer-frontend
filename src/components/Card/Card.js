@@ -25,7 +25,7 @@ function Card({ card }) {
           )}
         </p>
       </div>
-      {location.pathname === '/saved' && (
+      {location.pathname === '/saved-news' && (
         <div className="card__label card__label_keyword">
           <p className="card__label-text">{ card.keyword }</p>
         </div>
