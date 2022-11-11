@@ -2,11 +2,14 @@ import './Header.css';
 import Navigation from '../Navigation/Navigation';
 import FormSection from '../FormSection/FormSection';
 
-function Header() {
+function Header({ isLoggedIn, username, onSignInClick }) {
   return (
     <header className="header">
-      <Navigation></Navigation>
-      <FormSection></FormSection>
+      <Navigation 
+        isLoggedIn={isLoggedIn} 
+        username={username} 
+        onSignInClick={onSignInClick} />
+      <FormSection />
     </header>
   )
 };
