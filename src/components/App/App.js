@@ -8,6 +8,7 @@ import SuccessPopup from '../SuccessPopup/SuccessPopup';
 import SavedNews from '../SavedNews/SavedNews';
 import { cards } from '../../utils/temp_consts';
 import * as mainApi from '../../utils/MainApi';
+import CurrentUserContext from '../../contexts/CurrentUserContext';
 
 function App() {
   const [isLoginPopupOpen, setIsLoginPopupOpen] = useState(false);
@@ -16,6 +17,7 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [articles, setArticles] = useState(cards);
+  const [currentUser, setCurrentUser] = useState('Elise');
 
   const handleSignInButtonClick = () => {
     setIsLoginPopupOpen(true);
@@ -45,32 +47,42 @@ function App() {
       .catch((err) => console.log(err));
   };
 
-  const username = 'Elise';
-
   return (
-    <div className="page">
-      <Routes>
-        <Route 
-          path='/' 
-          element={
-            <Main 
-              isLoggedIn={isLoggedIn} 
-              username={username}
-              onSignInClick={handleSignInButtonClick}
-              isLoading={isLoading}
+    <CurrentUserContext.Provider value={currentUser}>
+      <div className="page">
+        <Routes>
+          <Route 
+            path='/' 
+            element={
+              <Main 
+                isLoggedIn={isLoggedIn} 
+                username={currentUser.name}
+                onSignInClick={handleSignInButtonClick}
+                isLoading={isLoading}
+                articles={articles} />
+              } />
+          <Route path='/saved-news' element={
+            <SavedNews 
+              username={currentUser.name} 
               articles={articles} />
-            } />
-        <Route path='/saved-news' element={<SavedNews username={username} articles={articles} />} />
-      </Routes>
+          } />
+        </Routes>
       
-      <LoginPopup isOpen={isLoginPopupOpen} onClose={closeAllPopups} onSignUpClick={handleSignUpClick} />
-      <RegisterPopup 
-        isOpen={isRegisterPopupOpen} 
-        onClose={closeAllPopups} 
-        onSignInClick={handleSignInButtonClick}
-        onRegister={handleRegister} />
-      <SuccessPopup isOpen={isSuccessPopupOpen} onClose={closeAllPopups} onSignInClick={handleSignInButtonClick} />
-    </div>
+        <LoginPopup 
+          isOpen={isLoginPopupOpen} 
+          onClose={closeAllPopups} 
+          onSignUpClick={handleSignUpClick} />
+        <RegisterPopup 
+          isOpen={isRegisterPopupOpen} 
+          onClose={closeAllPopups} 
+          onSignInClick={handleSignInButtonClick}
+          onRegister={handleRegister} />
+        <SuccessPopup 
+          isOpen={isSuccessPopupOpen} 
+          onClose={closeAllPopups} 
+          onSignInClick={handleSignInButtonClick} />
+      </div>
+    </CurrentUserContext.Provider>
   )
 }
 
