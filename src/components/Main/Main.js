@@ -11,7 +11,8 @@ function Main({
   onSignInClick,
   isLoading,
   articles,
-  onLogout
+  onLogout,
+  onSaveClick
  }) {
   return (
     <main className="main">
@@ -26,7 +27,7 @@ function Main({
       {articles.length === 0 ? (
         <NothingFound />
       ) : (
-        <CardList articles={articles} />
+        <CardList articles={articles} onSaveClick={onSaveClick} isLoggedIn={isLoggedIn} />
       )}
       
       <About />

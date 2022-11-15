@@ -13,7 +13,9 @@ export const cards = [
     which Louv attributes to nature educator Jon Young, is for both adults and children to find...`,
     date: 'November 4, 2020',
     source: 'National parks Traveler',
-    image: 'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg'
+    image: 'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg',
+    _id: '1',
+    link: 'https://www.google.de/'
   },
   {
     keyword: 'Parks',
@@ -22,7 +24,9 @@ export const cards = [
     took place on October 1, 1933, and marked the first step in the realization of a plan whereby the hiker will be...`,
     date: 'November 4, 2020',
     source: 'treehugger',
-    image: 'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg'
+    image: 'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg',
+    _id: '2',
+    link: 'https://www.google.de/'
   },
   {
     keyword: 'Nature',
@@ -32,7 +36,9 @@ export const cards = [
     which Louv attributes to nature educator Jon Young, is for both adults and children to find...`,
     date: 'November 4, 2020',
     source: 'treehugger',
-    image: 'https://www.whatsappimages.in/wp-content/uploads/2021/07/Top-HD-sad-quotes-for-whatsapp-status-in-hindi-Pics-Images-Download-Free.gif'
+    image: 'https://www.whatsappimages.in/wp-content/uploads/2021/07/Top-HD-sad-quotes-for-whatsapp-status-in-hindi-Pics-Images-Download-Free.gif',
+    _id: '3',
+    link: 'https://www.google.de/'
   },
   {
     keyword: 'Nature',
@@ -42,6 +48,8 @@ export const cards = [
     which Louv attributes to nature educator Jon Young, is for both adults and children to find...`,
     date: 'November 4, 2020',
     source: 'treehugger',
-    image: 'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg'
+    image: 'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg',
+    _id: '4',
+    link: 'https://www.google.de/'
   }
 ]

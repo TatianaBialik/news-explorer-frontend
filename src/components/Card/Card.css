@@ -5,6 +5,12 @@
   position: relative;
 }
 
+.card__link {
+  text-decoration: none;
+  margin: 0;
+  padding: 0;
+}
+
 .card__image {
   border-radius: 10px 10px 0 0;
   display: block;

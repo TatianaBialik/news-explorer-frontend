@@ -110,6 +110,22 @@ function App() {
       .catch((err) => console.log(err));
   };
 
+  // /////////////////////
+  // /* ARTICLE HANDLERS: SAVE, DELETE */
+  // function handleSaveClick(card) {
+  //   if (card.isSaved) {
+  //     mainApi
+  //       .deleteArticle(currentUser, card)
+  //       .then((res) => console.log(res))
+  //       .catch((err) => console.log(err));
+  //   } else {
+  //     mainApi
+  //       .saveArticle(currentUser, card)
+  //       .then((res) => console.log(res))
+  //       .catch((err) => console.log(err));
+  //   };
+  // }
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">

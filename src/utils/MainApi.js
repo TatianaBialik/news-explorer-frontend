@@ -47,3 +47,26 @@ export const getArticles = (token) => {
   })
     .then((res) => checkResponse(res));
 };
+
+// export const saveArticle = (user, { date, image, keyword, link, source, text, title }) => {
+//   console.log(user )
+//   return fetch(`${MAIN_URL}/articles`, {
+//     method: 'POST',
+//     headers: {
+//       'Content-Type': 'application/json',
+//     },
+//     body: JSON.stringify({ date, image, keyword, link, source, text, title, user }),
+//   })
+//     .then((res) => checkResponse(res));
+// };
+
+// export const deleteArticle = (user, article) => {
+//   return fetch(`${MAIN_URL}/articles/${article._id}`, {
+//     method: 'DELETE',
+//     headers: {
+//       'Content-Type': 'application/json',
+//     },
+//     body: JSON.stringify({ user }),
+//   })
+//     .then((res) => checkResponse(res));
+// };
