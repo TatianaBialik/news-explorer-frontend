@@ -4,7 +4,7 @@ function SavedCardsList({articles}) {
   return (
     <section className="cardlist">
       <ul className="cardlist__list">
-        {articles.map((article, i) => (
+        {articles && articles.map((article, i) => (
           <Card card={article} key={i} />
         ))}
       </ul>

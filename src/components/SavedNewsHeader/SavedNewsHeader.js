@@ -12,7 +12,7 @@ function SavedNewsHeader({ articles, username, onLogout }) {
         <p className="saved-header__keywords-block">
           By keywords: 
           <span className="saved-header__keywords">
-            {articles[0].keyword}, {articles[1].keyword}, and {articles.length-2} other
+            {/* {articles[0].keyword}, {articles[1].keyword}, and {articles.length-2} other */}
           </span>
         </p>
       </div>

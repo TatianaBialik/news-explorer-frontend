@@ -17,8 +17,9 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [articles, setArticles] = useState(cards);
-  const [currentUser, setCurrentUser] = useState('Elise');
+  const [currentUser, setCurrentUser] = useState('');
   const [token, setToken] = useState(localStorage.getItem('jwt'));
+  const [savedNews, setSavedNews] = useState([]);
 
   // const history = useHistory();
 
@@ -30,7 +31,7 @@ function App() {
         .checkToken(token)
         .then((res) => {
           if (res._id) {
-            setCurrentUser(res.name);
+            setCurrentUser(res);
             setIsLoggedIn(true);
           } else {
             localStorage.removeItem('jwt')
@@ -79,7 +80,7 @@ function App() {
       .then((res) => {
         if (res.token) {
           setIsLoggedIn(true);
-          setCurrentUser(res.name);
+          setCurrentUser(res);
           localStorage.setItem('jwt', res.token);
           setToken(res.token);
           closeAllPopups();
@@ -98,6 +99,17 @@ function App() {
     // history.push('/');
   };
 
+  ////////////////////////
+  /* SAVED NEWS LOADING */
+  function getSavedNews() {
+    mainApi
+      .getArticles(token)
+      .then((res) => {
+        setSavedNews(res);
+      })
+      .catch((err) => console.log(err));
+  };
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
@@ -108,7 +120,7 @@ function App() {
             element={
               <Main 
                 isLoggedIn={isLoggedIn} 
-                username={currentUser}
+                username={currentUser.name}
                 onSignInClick={handleSignInButtonClick}
                 isLoading={isLoading}
                 articles={articles}
@@ -119,9 +131,10 @@ function App() {
           <Route path='/saved-news' element={
             isLoggedIn ? (
               <SavedNews 
-                username={currentUser} 
-                articles={articles}
-                onLogout={handleLogout} />
+                username={currentUser.name} 
+                articles={savedNews}
+                onLogout={handleLogout}
+                onNewsLoading={getSavedNews} />
             ) : (
               <Navigate to='/' />
             )
