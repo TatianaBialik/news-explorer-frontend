@@ -20,6 +20,10 @@ function App() {
   const [currentUser, setCurrentUser] = useState('Elise');
   const [token, setToken] = useState(localStorage.getItem('jwt'));
 
+  // const history = useHistory();
+
+  ///////////////////////////////////////
+  /* POPUPS STATE CHANGING: OPEN/CLOSE */
   const handleSignInButtonClick = () => {
     setIsLoginPopupOpen(true);
   }
@@ -34,6 +38,8 @@ function App() {
     setIsSuccessPopupOpen(false);
   }
 
+  ///////////////////////////////////////////////////////////
+  /* AUTHORIZATION: REGISTER, LOGIN/LOGOUT, TOKEN CHECKING */
   function handleRegister({ email, password, name }) {
     mainApi
       .register(email, password, name)
@@ -65,6 +71,14 @@ function App() {
       .catch((err) => console.log(err));
   };
 
+  function handleLogout() {
+    setIsLoggedIn(false);
+    setCurrentUser('');
+    localStorage.removeItem('jwt');
+    setToken('');
+    // history.push('/');
+  };
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
@@ -77,12 +91,14 @@ function App() {
                 username={currentUser}
                 onSignInClick={handleSignInButtonClick}
                 isLoading={isLoading}
-                articles={articles} />
+                articles={articles}
+                onLogout={handleLogout} />
               } />
           <Route path='/saved-news' element={
             <SavedNews 
               username={currentUser} 
-              articles={articles} />
+              articles={articles}
+              onLogout={handleLogout} />
           } />
         </Routes>
       

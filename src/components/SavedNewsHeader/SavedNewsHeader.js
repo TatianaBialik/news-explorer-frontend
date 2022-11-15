@@ -1,10 +1,10 @@
 import './SavedNewsHeader.css';
 import Navigation from '../Navigation/Navigation';
 
-function SavedNewsHeader({ articles, username }) {
+function SavedNewsHeader({ articles, username, onLogout }) {
   return (
     <header className="saved-header">
-      <Navigation isLoggedIn={true} username={username} />
+      <Navigation isLoggedIn={true} username={username} onLogout={onLogout} />
 
       <div className="saved-header__info">
         <p className="saved-header__subtitle">Saved articles</p>

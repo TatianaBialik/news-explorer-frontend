@@ -10,11 +10,16 @@ function Main({
   username, 
   onSignInClick,
   isLoading,
-  articles
+  articles,
+  onLogout
  }) {
   return (
     <main className="main">
-      <Header isLoggedIn={isLoggedIn} username={username} onSignInClick={onSignInClick} />
+      <Header 
+        isLoggedIn={isLoggedIn} 
+        username={username} 
+        onSignInClick={onSignInClick}
+        onLogout={onLogout} />
       {isLoading && (
         <Preloader />
       )}
