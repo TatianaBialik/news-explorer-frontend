@@ -18,6 +18,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [articles, setArticles] = useState(cards);
   const [currentUser, setCurrentUser] = useState('Elise');
+  const [token, setToken] = useState(localStorage.getItem('jwt'));
 
   const handleSignInButtonClick = () => {
     setIsLoginPopupOpen(true);
@@ -47,6 +48,23 @@ function App() {
       .catch((err) => console.log(err));
   };
 
+  function handleLogin({ email, password }) {
+    mainApi
+      .login(email, password)
+      .then((res) => {
+        if (res.token) {
+          setIsLoggedIn(true);
+          setCurrentUser(res.name);
+          localStorage.setItem('jwt', res.token);
+          setToken(res.token);
+          closeAllPopups();
+        } else {
+          console.log(res);
+        }
+      })
+      .catch((err) => console.log(err));
+  };
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
@@ -56,14 +74,14 @@ function App() {
             element={
               <Main 
                 isLoggedIn={isLoggedIn} 
-                username={currentUser.name}
+                username={currentUser}
                 onSignInClick={handleSignInButtonClick}
                 isLoading={isLoading}
                 articles={articles} />
               } />
           <Route path='/saved-news' element={
             <SavedNews 
-              username={currentUser.name} 
+              username={currentUser} 
               articles={articles} />
           } />
         </Routes>
@@ -71,7 +89,8 @@ function App() {
         <LoginPopup 
           isOpen={isLoginPopupOpen} 
           onClose={closeAllPopups} 
-          onSignUpClick={handleSignUpClick} />
+          onSignUpClick={handleSignUpClick}
+          onLogin={handleLogin} />
         <RegisterPopup 
           isOpen={isRegisterPopupOpen} 
           onClose={closeAllPopups} 
