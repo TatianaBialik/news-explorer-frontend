@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Route, Routes, Redirect, useHistory } from 'react-router-dom';
 
 import Main from '../Main/Main';
@@ -21,6 +21,25 @@ function App() {
   const [token, setToken] = useState(localStorage.getItem('jwt'));
 
   // const history = useHistory();
+
+  /////////////////////////////////////////////////////////////////
+  /* CHECKING TOKEN WHEN THE RESOURSE IS LOADED/TOKEN IS CHANGED */
+  useEffect(() => {
+    if (token) {
+      mainApi
+        .checkToken(token)
+        .then((res) => {
+          if (res._id) {
+            setCurrentUser(res.name);
+            setIsLoggedIn(true);
+          } else {
+            localStorage.removeItem('jwt')
+            console.log(res);
+          }
+        })
+        .catch((err) => console.log(err));
+    };
+  }, [token]);
 
   ///////////////////////////////////////
   /* POPUPS STATE CHANGING: OPEN/CLOSE */
