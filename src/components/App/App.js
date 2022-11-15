@@ -7,6 +7,7 @@ import RegisterPopup from '../RegisterPopup/RegisterPopup';
 import SuccessPopup from '../SuccessPopup/SuccessPopup';
 import SavedNews from '../SavedNews/SavedNews';
 import { cards } from '../../utils/temp_consts';
+import * as mainApi from '../../utils/MainApi';
 
 function App() {
   const [isLoginPopupOpen, setIsLoginPopupOpen] = useState(false);
@@ -30,6 +31,20 @@ function App() {
     setIsSuccessPopupOpen(false);
   }
 
+  function handleRegister({ email, password, name }) {
+    mainApi
+      .register(email, password, name)
+      .then((res) => {
+        if (res._id) {
+          closeAllPopups();
+          setIsSuccessPopupOpen(true);
+        } else {
+          console.log(res);
+        };
+      })
+      .catch((err) => console.log(err));
+  };
+
   const username = 'Elise';
 
   return (
@@ -49,7 +64,11 @@ function App() {
       </Routes>
       
       <LoginPopup isOpen={isLoginPopupOpen} onClose={closeAllPopups} onSignUpClick={handleSignUpClick} />
-      <RegisterPopup isOpen={isRegisterPopupOpen} onClose={closeAllPopups} onSignInClick={handleSignInButtonClick} />
+      <RegisterPopup 
+        isOpen={isRegisterPopupOpen} 
+        onClose={closeAllPopups} 
+        onSignInClick={handleSignInButtonClick}
+        onRegister={handleRegister} />
       <SuccessPopup isOpen={isSuccessPopupOpen} onClose={closeAllPopups} onSignInClick={handleSignInButtonClick} />
     </div>
   )
