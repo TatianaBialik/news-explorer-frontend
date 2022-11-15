@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Route, Routes, Redirect, useHistory } from 'react-router-dom';
+import { Route, Routes, Redirect, useHistory, Navigate } from 'react-router-dom';
 
 import Main from '../Main/Main';
 import LoginPopup from '../LoginPopup/LoginPopup';
@@ -102,6 +102,7 @@ function App() {
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
         <Routes>
+          { /* MAIN PAGE AVAILABLE FOR EACH USER */}
           <Route 
             path='/' 
             element={
@@ -113,12 +114,21 @@ function App() {
                 articles={articles}
                 onLogout={handleLogout} />
               } />
+
+          {/* ONLY AUTHORIZED USERS ACCESS */}
           <Route path='/saved-news' element={
-            <SavedNews 
-              username={currentUser} 
-              articles={articles}
-              onLogout={handleLogout} />
+            isLoggedIn ? (
+              <SavedNews 
+                username={currentUser} 
+                articles={articles}
+                onLogout={handleLogout} />
+            ) : (
+              <Navigate to='/' />
+            )
           } />
+          
+          {/* REST OF PATHS A REDIRECTED TO THE MAIN PAGE */}
+          <Route path='*' element={<Navigate to='/' />} />
         </Routes>
       
         <LoginPopup 
