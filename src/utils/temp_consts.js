@@ -14,8 +14,7 @@ export const cards = [
     date: 'November 4, 2020',
     source: 'National parks Traveler',
     image: 'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg',
-    _id: '1',
-    link: 'https://www.google.de/'
+    url: 'https://www.google.de/'
   },
   {
     keyword: 'Parks',
@@ -25,8 +24,7 @@ export const cards = [
     date: 'November 4, 2020',
     source: 'treehugger',
     image: 'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg',
-    _id: '2',
-    link: 'https://www.google.de/'
+    url: 'https://www.google.com/search?q=redirect+react+router+dom+v6&oq=redirect+&aqs=chrome.1.69i57j0i512l4j69i60l3.2337j0j7&sourceid=chrome&ie=UTF-8'
   },
   {
     keyword: 'Nature',
@@ -37,8 +35,7 @@ export const cards = [
     date: 'November 4, 2020',
     source: 'treehugger',
     image: 'https://www.whatsappimages.in/wp-content/uploads/2021/07/Top-HD-sad-quotes-for-whatsapp-status-in-hindi-Pics-Images-Download-Free.gif',
-    _id: '3',
-    link: 'https://www.google.de/'
+    url: 'https://stackoverflow.com/questions/69868956/how-can-i-redirect-in-react-router-v6'
   },
   {
     keyword: 'Nature',
@@ -49,7 +46,6 @@ export const cards = [
     date: 'November 4, 2020',
     source: 'treehugger',
     image: 'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg',
-    _id: '4',
-    link: 'https://www.google.de/'
+    url: 'https://www.google.com/search?q=%D0%BA%D0%BB%D0%B8%D0%BA+%D0%BD%D0%B0+%D1%8D%D0%BB%D0%B5%D0%BC%D0%B5%D0%BD%D1%82+%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%B0%D0%BB+%D0%BA%D0%B0%D0%BA+%D1%81%D1%81%D1%8B%D0%BB%D0%BA%D0%B0+react&oq=%D0%BA%D0%BB%D0%B8%D0%BA+%D0%BD%D0%B0+%D1%8D%D0%BB%D0%B5%D0%BC%D0%B5%D0%BD%D1%82+%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%B0%D0%BB+%D0%BA%D0%B0%D0%BA+%D1%81%D1%81%D1%8B%D0%BB%D0%BA%D0%B0+react&aqs=chrome..69i57j33i160.12011j0j7&sourceid=chrome&ie=UTF-8'
   }
 ]

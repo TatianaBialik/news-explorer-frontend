@@ -1,14 +1,9 @@
 import './Card.css';
 import { useLocation } from 'react-router-dom';
+import { useState } from 'react';
 
 function Card({ card, isLoggedIn }) {
   const location = useLocation();
-
-  // function handleSaveClick() {
-  //   onSave(card);
-  //   card.isSaved = !card.isSaved;
-  //   console.log(card);
-  // }
 
   return (
     <li className="card">
@@ -22,7 +17,7 @@ function Card({ card, isLoggedIn }) {
           src={card.image}
           alt={`The ${card.title} article illustration`} />
         {location.pathname === '/' ? (
-          <button className="card__button card__button_type_save" />
+          <button className={`card__button card__button_type_save`} />
         ) : (
           <button className="card__button card__button_type_delete" />
         )}

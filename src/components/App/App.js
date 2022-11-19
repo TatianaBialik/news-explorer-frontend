@@ -42,6 +42,22 @@ function App() {
     };
   }, [token]);
 
+  /////////////////////////////////////////
+  /* SAVED NEWS LOADING WHEN PAGE LOADED */
+  function getSavedNews() {
+    mainApi
+      .getArticles(token)
+      .then((res) => {
+        setSavedNews(res);
+      })
+      .catch((err) => console.log(err));
+  };
+
+  useEffect(() => {
+    if(token)
+      getSavedNews();
+  }, []);
+
   ///////////////////////////////////////
   /* POPUPS STATE CHANGING: OPEN/CLOSE */
   const handleSignInButtonClick = () => {
@@ -99,32 +115,8 @@ function App() {
     // history.push('/');
   };
 
-  ////////////////////////
-  /* SAVED NEWS LOADING */
-  function getSavedNews() {
-    mainApi
-      .getArticles(token)
-      .then((res) => {
-        setSavedNews(res);
-      })
-      .catch((err) => console.log(err));
-  };
-
-  // /////////////////////
-  // /* ARTICLE HANDLERS: SAVE, DELETE */
-  // function handleSaveClick(card) {
-  //   if (card.isSaved) {
-  //     mainApi
-  //       .deleteArticle(currentUser, card)
-  //       .then((res) => console.log(res))
-  //       .catch((err) => console.log(err));
-  //   } else {
-  //     mainApi
-  //       .saveArticle(currentUser, card)
-  //       .then((res) => console.log(res))
-  //       .catch((err) => console.log(err));
-  //   };
-  // }
+  ////////////////////////////////////
+  /* ARTICLE HANDLERS: SAVE, DELETE */
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -140,7 +132,8 @@ function App() {
                 onSignInClick={handleSignInButtonClick}
                 isLoading={isLoading}
                 articles={articles}
-                onLogout={handleLogout} />
+                onLogout={handleLogout}
+                savedArticles={savedNews} />
               } />
 
           {/* ONLY AUTHORIZED USERS ACCESS */}

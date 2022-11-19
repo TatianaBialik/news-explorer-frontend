@@ -4,10 +4,6 @@ import SavedCardsList from '../SavedCardsList/SavedCardsList';
 import { useEffect } from 'react';
 
 function SavedNews({ username, articles, onLogout, onNewsLoading }) {
-  useEffect(() => {
-    onNewsLoading();
-  }, []);
-
   return (
     <>
       <SavedNewsHeader 
