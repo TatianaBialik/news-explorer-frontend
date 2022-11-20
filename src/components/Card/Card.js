@@ -89,7 +89,7 @@ function Card({
 
         {location.pathname === '/saved-news' && (
           <div className="card__label card__label_type_keyword">
-            {/* <p className="card__label-text">{card.keyword}</p> */}
+            <p className="card__label-text">{card.keyword}</p>
           </div>
         )}
 

@@ -9,7 +9,8 @@ function PopupWithForm({
   onClose,
   onSignInClick,
   onSignUpClick,
-  onSubmit
+  onSubmit,
+  isValid
 }) {
 
   const handleSignInClick = () => {
@@ -33,8 +34,7 @@ function PopupWithForm({
         className="form"
         onSubmit={handleSubmit}>
         {children}
-        <span className="form__error form__error_common">ppp</span>
-        <button type='submit' className="form__submit-button">{name}</button>
+        <button type='submit' className={`form__submit-button ${!isValid && 'form__submit-button_disable'}`} disabled={!isValid}>{name}</button>
       </form>
       <p className="form__subtext">
         or&nbsp;

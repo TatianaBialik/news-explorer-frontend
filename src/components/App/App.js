@@ -26,6 +26,7 @@ function App() {
   const [savedNews, setSavedNews] = useState([]);
   const [wasSearch, setWasSearch] = useState(false);
   const [currentKeyword, setCurrentKeyword] = useState('');
+  const [registerError, setRegisterError] = useState(false);
 
   const ADDED_CARDS = 3;
 
@@ -74,6 +75,7 @@ function App() {
 
   const handleSignUpClick = () => {
     setIsRegisterPopupOpen(true);
+    setRegisterError(false);
   }
 
   const closeAllPopups = () => {
@@ -95,7 +97,10 @@ function App() {
           console.log(res);
         };
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        if (err === 'Error: 409') setRegisterError(true);
+        else console.log(err);
+      });
   };
 
   function handleLogin({ email, password }) {
@@ -218,7 +223,8 @@ function App() {
             isOpen={isRegisterPopupOpen}
             onClose={closeAllPopups}
             onSignInClick={handleSignInButtonClick}
-            onRegister={handleRegister} />
+            onRegister={handleRegister}
+            isCommonError={registerError} />
           <SuccessPopup
             isOpen={isSuccessPopupOpen}
             onClose={closeAllPopups}
