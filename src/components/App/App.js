@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Route, Routes, Redirect, useHistory, Navigate } from 'react-router-dom';
 
 import Main from '../Main/Main';
@@ -17,11 +17,13 @@ function App() {
   const [isSuccessPopupOpen, setIsSuccessPopupOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [articles, setArticles] = useState([]);
+  // const [articles, setArticles] = useState([]);
+  const articles = useRef([]);
   const [renderedCards, setRenderedCards] = useState([]);
   const [currentUser, setCurrentUser] = useState('');
   const [token, setToken] = useState(localStorage.getItem('jwt'));
   const [savedNews, setSavedNews] = useState([]);
+  const [wasSearch, setWasSearch] = useState(false);
 
   const ADDED_CARDS = 3;
 
@@ -116,6 +118,7 @@ function App() {
     setCurrentUser('');
     localStorage.removeItem('jwt');
     setToken('');
+    setIsLoginPopupOpen(true);
     // history.push('/');
   };
 
@@ -124,12 +127,20 @@ function App() {
   function handleSearch(keyword) {
     search(keyword)
       .then((res) => {
+        setIsLoading(true);
         if (res.articles) {
-          console.log(res.articles)
-          setArticles(res.articles);
-          setRenderedCards(articles.slice(0, ADDED_CARDS));
+          articles.current = res.articles;
+          setRenderedCards(articles.current.slice(0, ADDED_CARDS));
         }
       })
+      .catch((err) => console.log(err))
+      .finally(() => {
+        setIsLoading(false);
+      })
+  }
+
+  function handleShowMore() {
+    setRenderedCards(articles.current.slice(0, renderedCards.length + ADDED_CARDS));
   }
 
   return (
@@ -145,10 +156,11 @@ function App() {
                 username={currentUser.name}
                 onSignInClick={handleSignInButtonClick}
                 isLoading={isLoading}
-                articles={articles}
+                articles={renderedCards}
                 onLogout={handleLogout}
                 savedArticles={savedNews}
-                onSearch={handleSearch} />
+                onSearch={handleSearch}
+                onShowMore={handleShowMore} />
               } />
 
           {/* ONLY AUTHORIZED USERS ACCESS */}

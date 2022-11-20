@@ -19,7 +19,9 @@ function SearchForm({ onSearch }) {
         name='keyword'
         onChange={handleChange}
         required></input>
-      <button className='search-form__submit-button'>Search</button>
+      <button 
+        type='submit' 
+        className='search-form__submit-button'>Search</button>
     </form>
   )
 }

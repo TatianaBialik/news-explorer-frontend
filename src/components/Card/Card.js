@@ -8,13 +8,13 @@ function Card({ card, isLoggedIn }) {
   return (
     <li className="card">
       <a
-        href={card.link}
+        href={card.url}
         className="card__link"
         target='_blank'
         rel="noopener noreferrer">
         <img
           className="card__image"
-          src={card.image}
+          src={card.urlToImage}
           alt={`The ${card.title} article illustration`} />
         {location.pathname === '/' ? (
           <button className={`card__button card__button_type_save`} />
@@ -36,15 +36,15 @@ function Card({ card, isLoggedIn }) {
 
         {location.pathname === '/saved-news' && (
           <div className="card__label card__label_type_keyword">
-            <p className="card__label-text">{card.keyword}</p>
+            {/* <p className="card__label-text">{card.keyword}</p> */}
           </div>
         )}
 
         <div className="card__description">
-          <p className="card__date">{card.date}</p>
+          <p className="card__date">{card.publishedAt}</p>
           <h3 className="card__title">{card.title}</h3>
-          <p className="card__text">{card.text}</p>
-          <p className="card__source">{card.source}</p>
+          <p className="card__text">{card.content}</p>
+          <p className="card__source">{card.source.name}</p>
         </div>
       </a>
     </li>

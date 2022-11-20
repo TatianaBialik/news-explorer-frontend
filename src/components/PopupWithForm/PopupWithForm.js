@@ -34,7 +34,7 @@ function PopupWithForm({
         onSubmit={handleSubmit}>
         {children}
         <span className="form__error form__error_common">ppp</span>
-        <button className="form__submit-button">{name}</button>
+        <button type='submit' className="form__submit-button">{name}</button>
       </form>
       <p className="form__subtext">
         or&nbsp;

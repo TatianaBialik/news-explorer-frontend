@@ -14,7 +14,8 @@ function Main({
   onLogout,
   onSaveClick,
   savedArticles,
-  onSearch
+  onSearch,
+  onShowMore
  }) {
   return (
     <main className="main">
@@ -34,7 +35,8 @@ function Main({
           articles={articles} 
           onSaveClick={onSaveClick} 
           isLoggedIn={isLoggedIn} 
-          savedArticles={savedArticles} />
+          savedArticles={savedArticles}
+          onShowMore={onShowMore} />
       )}
       
       <About />

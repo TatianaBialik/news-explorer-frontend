@@ -1,7 +1,13 @@
 import './CardList.css';
 import Card from '../Card/Card';
 
-function CardList({ articles, isLoggedIn, onSaveClick, savedArticles }) {
+function CardList({ 
+  articles, 
+  isLoggedIn, 
+  onSaveClick, 
+  savedArticles, 
+  onShowMore 
+}) {
   return (
     <section className='cardlist'>
       <h2 className="cardlist__title">Search results</h2>
@@ -15,7 +21,9 @@ function CardList({ articles, isLoggedIn, onSaveClick, savedArticles }) {
             savedArticles={savedArticles} />
         ))}
       </ul>
-      <button className='cardlist__show-more-button'>Show more</button>
+      <button 
+        className='cardlist__show-more-button'
+        onClick={onShowMore}>Show more</button>
     </section>
   )
 }
