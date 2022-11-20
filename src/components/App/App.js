@@ -9,6 +9,7 @@ import SavedNews from '../SavedNews/SavedNews';
 import { cards } from '../../utils/temp_consts';
 import * as mainApi from '../../utils/MainApi';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
+import search from '../../utils/NewsApi';
 
 function App() {
   const [isLoginPopupOpen, setIsLoginPopupOpen] = useState(false);
@@ -16,10 +17,13 @@ function App() {
   const [isSuccessPopupOpen, setIsSuccessPopupOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [articles, setArticles] = useState(cards);
+  const [articles, setArticles] = useState([]);
+  const [renderedCards, setRenderedCards] = useState([]);
   const [currentUser, setCurrentUser] = useState('');
   const [token, setToken] = useState(localStorage.getItem('jwt'));
   const [savedNews, setSavedNews] = useState([]);
+
+  const ADDED_CARDS = 3;
 
   // const history = useHistory();
 
@@ -115,8 +119,18 @@ function App() {
     // history.push('/');
   };
 
-  ////////////////////////////////////
-  /* ARTICLE HANDLERS: SAVE, DELETE */
+  //////////////////////////////////////
+  /* SEARCH ARTICLES AND RENDER CARDS */
+  function handleSearch(keyword) {
+    search(keyword)
+      .then((res) => {
+        if (res.articles) {
+          console.log(res.articles)
+          setArticles(res.articles);
+          setRenderedCards(articles.slice(0, ADDED_CARDS));
+        }
+      })
+  }
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -133,7 +147,8 @@ function App() {
                 isLoading={isLoading}
                 articles={articles}
                 onLogout={handleLogout}
-                savedArticles={savedNews} />
+                savedArticles={savedNews}
+                onSearch={handleSearch} />
               } />
 
           {/* ONLY AUTHORIZED USERS ACCESS */}

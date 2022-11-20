@@ -13,7 +13,8 @@ function Main({
   articles,
   onLogout,
   onSaveClick,
-  savedArticles
+  savedArticles,
+  onSearch
  }) {
   return (
     <main className="main">
@@ -21,7 +22,8 @@ function Main({
         isLoggedIn={isLoggedIn} 
         username={username} 
         onSignInClick={onSignInClick}
-        onLogout={onLogout} />
+        onLogout={onLogout}
+        onSearch={onSearch} />
       {isLoading && (
         <Preloader />
       )}
