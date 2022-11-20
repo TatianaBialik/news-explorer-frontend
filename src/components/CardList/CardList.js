@@ -4,7 +4,7 @@ import Card from '../Card/Card';
 function CardList({ 
   articles, 
   isLoggedIn, 
-  onSaveClick, 
+  onSave, 
   savedArticles, 
   onShowMore 
 }) {
@@ -17,7 +17,7 @@ function CardList({
             key={i} 
             card={article} 
             isLoggedIn={isLoggedIn} 
-            onSave={onSaveClick}
+            onSave={onSave}
             savedArticles={savedArticles} />
         ))}
       </ul>

@@ -9,6 +9,7 @@ import SavedNews from '../SavedNews/SavedNews';
 import { cards } from '../../utils/temp_consts';
 import * as mainApi from '../../utils/MainApi';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
+import SavedNewsContext from '../../contexts/SavedNewsContext';
 import search from '../../utils/NewsApi';
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
   const [token, setToken] = useState(localStorage.getItem('jwt'));
   const [savedNews, setSavedNews] = useState([]);
   const [wasSearch, setWasSearch] = useState(false);
+  const [currentKeyword, setCurrentKeyword] = useState('');
 
   const ADDED_CARDS = 3;
 
@@ -60,7 +62,7 @@ function App() {
   };
 
   useEffect(() => {
-    if(token)
+    if (token)
       getSavedNews();
   }, []);
 
@@ -126,6 +128,7 @@ function App() {
   /* SEARCH ARTICLES AND RENDER CARDS */
   const handleSearch = (keyword) => {
     setIsLoading(true);
+    setCurrentKeyword(keyword);
     search(keyword)
       .then((res) => {
         setWasSearch(true);
@@ -148,71 +151,80 @@ function App() {
 
   ///////////////////////////////////////////////
   /* CARDS INTERACTIONS HANDLERS: SAVE, DELETE */
-  const handleSave = () => {
-
+  const handleSave = (card) => {
+    mainApi
+      .saveArticle(token, card, currentKeyword)
+      .then((res) => {
+        setSavedNews([...savedNews, res]);
+      })
+      .catch((err) => console.log(err));
   }
 
   const handleDelete = (card) => {
     mainApi
       .deleteArticle(token, card)
       .then((res) => {
-        setSavedNews(savedNews.filter((currArticle) => currArticle.url !== card.url))
+        setSavedNews(savedNews.filter((currArticle) => currArticle._id !== card._id))
       })
+      .catch((err) => console.log(err));
   }
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
-      <div className="page">
-        <Routes>
-          { /* MAIN PAGE AVAILABLE FOR EACH USER */}
-          <Route 
-            path='/' 
-            element={
-              <Main 
-                isLoggedIn={isLoggedIn}
-                onSignInClick={handleSignInButtonClick}
-                isLoading={isLoading}
-                articles={renderedCards}
-                onLogout={handleLogout}
-                savedArticles={savedNews}
-                onSearch={handleSearch}
-                onShowMore={handleShowMore}
-                wasSearch={wasSearch} />
+      {/* <SavedNewsContext.Provider value={savedNews}> */}
+        <div className="page">
+          <Routes>
+            { /* MAIN PAGE AVAILABLE FOR EACH USER */}
+            <Route
+              path='/'
+              element={
+                <Main
+                  isLoggedIn={isLoggedIn}
+                  onSignInClick={handleSignInButtonClick}
+                  isLoading={isLoading}
+                  articles={renderedCards}
+                  onLogout={handleLogout}
+                  savedArticles={savedNews}
+                  onSearch={handleSearch}
+                  onShowMore={handleShowMore}
+                  wasSearch={wasSearch}
+                  onSave={handleSave} />
               } />
 
-          {/* ONLY AUTHORIZED USERS ACCESS */}
-          <Route path='/saved-news' element={
-            isLoggedIn ? (
-              <SavedNews 
-                username={currentUser.name} 
-                articles={savedNews}
-                onLogout={handleLogout}
-                onNewsLoading={getSavedNews}
-                onDelete={handleDelete} />
-            ) : (
-              <Navigate to='/' />
-            )
-          } />
-          
-          {/* REST OF PATHS A REDIRECTED TO THE MAIN PAGE */}
-          <Route path='*' element={<Navigate to='/' />} />
-        </Routes>
-      
-        <LoginPopup 
-          isOpen={isLoginPopupOpen} 
-          onClose={closeAllPopups} 
-          onSignUpClick={handleSignUpClick}
-          onLogin={handleLogin} />
-        <RegisterPopup 
-          isOpen={isRegisterPopupOpen} 
-          onClose={closeAllPopups} 
-          onSignInClick={handleSignInButtonClick}
-          onRegister={handleRegister} />
-        <SuccessPopup 
-          isOpen={isSuccessPopupOpen} 
-          onClose={closeAllPopups} 
-          onSignInClick={handleSignInButtonClick} />
-      </div>
+            {/* ONLY AUTHORIZED USERS ACCESS */}
+            <Route path='/saved-news' element={
+              isLoggedIn ? (
+                <SavedNews
+                  username={currentUser.name}
+                  articles={savedNews}
+                  onLogout={handleLogout}
+                  onNewsLoading={getSavedNews}
+                  onDelete={handleDelete} />
+              ) : (
+                <Navigate to='/' />
+              )
+            } />
+
+            {/* REST OF PATHS A REDIRECTED TO THE MAIN PAGE */}
+            <Route path='*' element={<Navigate to='/' />} />
+          </Routes>
+
+          <LoginPopup
+            isOpen={isLoginPopupOpen}
+            onClose={closeAllPopups}
+            onSignUpClick={handleSignUpClick}
+            onLogin={handleLogin} />
+          <RegisterPopup
+            isOpen={isRegisterPopupOpen}
+            onClose={closeAllPopups}
+            onSignInClick={handleSignInButtonClick}
+            onRegister={handleRegister} />
+          <SuccessPopup
+            isOpen={isSuccessPopupOpen}
+            onClose={closeAllPopups}
+            onSignInClick={handleSignInButtonClick} />
+        </div>
+      {/* </SavedNewsContext.Provider> */}
     </CurrentUserContext.Provider>
   )
 }

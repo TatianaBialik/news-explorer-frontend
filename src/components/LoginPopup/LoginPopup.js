@@ -1,5 +1,6 @@
 import PopupWithForm from '../PopupWithForm/PopupWithForm';
 import useForm from '../../utils/useForm';
+import { useEffect } from 'react';
 
 function LoginPopup({
   isOpen,
@@ -7,7 +8,11 @@ function LoginPopup({
   onSignUpClick,
   onLogin
 }) {
-  const {values, handleChange} = useForm({ email: '', password: '' });
+  const {values, handleChange, setValues} = useForm({ email: '', password: '' });
+
+  useEffect(() => {
+    setValues({ email: '', password: '' });
+  }, [isOpen]);
 
   function handleSubmit() {
     onLogin(values);
@@ -27,6 +32,7 @@ function LoginPopup({
         className='form__input' 
         placeholder='Enter email'
         onChange={handleChange}
+        value={values.email}
         required />
       <span className="form__error email-error">Invalid email address</span>
       <label className='form__label'>Password</label>
@@ -35,7 +41,8 @@ function LoginPopup({
         name='password'
         className='form__input' 
         placeholder='Enter password'
-        onChange={handleChange}  
+        onChange={handleChange} 
+        value={values.password} 
         required />
       <span className="form__error password-error">Invalid password</span>
     </PopupWithForm>

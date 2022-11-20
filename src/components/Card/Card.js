@@ -1,15 +1,18 @@
 import './Card.css';
 import { useLocation } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import SavedNewsContext from '../../contexts/SavedNewsContext';
 
 function Card({
   card,
   isLoggedIn,
-  onDelete }) {
+  savedArticles,
+  onDelete,
+  onSave }) {
   const location = useLocation();
 
   function setDateString() {
-    const date = new Date(card.publishedAt);
+    const date = new Date(card.publishedAt || card.date);
     const months = [
       'January',
       'February',
@@ -27,23 +30,45 @@ function Card({
     return `${months[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`
   }
 
-  function handleDelete() {
+  function checkIsCardSaved() {
+    savedArticles.forEach((article) => {
+      console.log('Link:' + article.link + '   URL:   ' + card.url + 'xxxxxxxxx')
+      if (article.link === card.url)
+        return true;
+      return false;
+    })
+  }
+
+  const handleSaveClick = (e) => {
+    e.preventDefault();
+    console.log(savedArticles)
+    if (checkIsCardSaved()) {
+      onDelete(card);
+    } else {
+      onSave(card);
+    }
+  }
+
+  function handleDelete(e) {
+    e.preventDefault();
     onDelete(card);
   }
 
   return (
     <li className="card">
       <a
-        href={card.url}
+        href={card.url || card.link}
         className="card__link"
         target='_blank'
         rel="noopener noreferrer">
         <img
           className="card__image"
-          src={card.urlToImage}
+          src={card.urlToImage || card.image}
           alt={`The ${card.title} article illustration`} />
         {location.pathname === '/' ? (
-          <button className={`card__button card__button_type_save`} />
+          <button 
+            className={`card__button card__button_type_save ${checkIsCardSaved() && 'card__button_type_saved'}`}
+            onClick={handleSaveClick} />
         ) : (
           <button
             className="card__button card__button_type_delete"
@@ -71,8 +96,8 @@ function Card({
         <div className="card__description">
           <p className="card__date">{setDateString()}</p>
           <h3 className="card__title">{card.title}</h3>
-          <p className="card__text">{card.content}</p>
-          <p className="card__source">{card.source.name}</p>
+          <p className="card__text">{card.description || card.text}</p>
+          <p className="card__source">{card.source.name || card.source}</p>
         </div>
       </a>
     </li>

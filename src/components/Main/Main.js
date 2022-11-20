@@ -11,11 +11,11 @@ function Main({
   isLoading,
   articles,
   onLogout,
-  onSaveClick,
   savedArticles,
   onSearch,
   onShowMore,
-  wasSearch
+  wasSearch,
+  onSave
 }) {
   const blockState = () => {
     if (isLoading) return (<Preloader />);
@@ -24,7 +24,7 @@ function Main({
     }
     return (<CardList
       articles={articles}
-      onSaveClick={onSaveClick}
+      onSave={onSave}
       isLoggedIn={isLoggedIn}
       savedArticles={savedArticles}
       onShowMore={onShowMore} />);
