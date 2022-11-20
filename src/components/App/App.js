@@ -146,6 +146,20 @@ function App() {
     setRenderedCards(articles.current.slice(0, renderedCards.length + ADDED_CARDS));
   }
 
+  ///////////////////////////////////////////////
+  /* CARDS INTERACTIONS HANDLERS: SAVE, DELETE */
+  const handleSave = () => {
+
+  }
+
+  const handleDelete = (card) => {
+    mainApi
+      .deleteArticle(token, card)
+      .then((res) => {
+        setSavedNews(savedNews.filter((currArticle) => currArticle.url !== card.url))
+      })
+  }
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
@@ -173,7 +187,8 @@ function App() {
                 username={currentUser.name} 
                 articles={savedNews}
                 onLogout={handleLogout}
-                onNewsLoading={getSavedNews} />
+                onNewsLoading={getSavedNews}
+                onDelete={handleDelete} />
             ) : (
               <Navigate to='/' />
             )

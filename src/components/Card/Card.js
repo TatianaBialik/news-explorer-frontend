@@ -2,7 +2,10 @@ import './Card.css';
 import { useLocation } from 'react-router-dom';
 import { useState } from 'react';
 
-function Card({ card, isLoggedIn }) {
+function Card({
+  card,
+  isLoggedIn,
+  onDelete }) {
   const location = useLocation();
 
   function setDateString() {
@@ -24,6 +27,10 @@ function Card({ card, isLoggedIn }) {
     return `${months[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`
   }
 
+  function handleDelete() {
+    onDelete(card);
+  }
+
   return (
     <li className="card">
       <a
@@ -38,7 +45,9 @@ function Card({ card, isLoggedIn }) {
         {location.pathname === '/' ? (
           <button className={`card__button card__button_type_save`} />
         ) : (
-          <button className="card__button card__button_type_delete" />
+          <button
+            className="card__button card__button_type_delete"
+            onClick={handleDelete} />
         )}
 
         {((location.pathname === '/' && !isLoggedIn) || location.pathname === '/saved-news') && (
