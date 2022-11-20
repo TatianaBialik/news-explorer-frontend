@@ -4,7 +4,6 @@ import FormSection from '../FormSection/FormSection';
 
 function Header({
   isLoggedIn,
-  username,
   onSignInClick,
   onLogout,
   onSearch
@@ -13,7 +12,6 @@ function Header({
     <header className="header">
       <Navigation
         isLoggedIn={isLoggedIn}
-        username={username}
         onSignInClick={onSignInClick}
         onLogout={onLogout} />
       <FormSection onSearch={onSearch} />

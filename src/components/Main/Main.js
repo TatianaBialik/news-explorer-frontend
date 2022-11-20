@@ -5,9 +5,8 @@ import Footer from '../Footer/Footer';
 import Preloader from '../Preloader/Preloader';
 import NothingFound from '../NothingFound/NothingFound';
 
-function Main({ 
-  isLoggedIn, 
-  username, 
+function Main({
+  isLoggedIn,
   onSignInClick,
   isLoading,
   articles,
@@ -15,30 +14,45 @@ function Main({
   onSaveClick,
   savedArticles,
   onSearch,
-  onShowMore
- }) {
+  onShowMore,
+  wasSearch
+}) {
+  const blockState = () => {
+    if (isLoading) return (<Preloader />);
+    if (articles.length === 0) {
+      return (<NothingFound />);
+    }
+    return (<CardList
+      articles={articles}
+      onSaveClick={onSaveClick}
+      isLoggedIn={isLoggedIn}
+      savedArticles={savedArticles}
+      onShowMore={onShowMore} />);
+  }
+
   return (
     <main className="main">
-      <Header 
-        isLoggedIn={isLoggedIn} 
-        username={username} 
+      <Header
+        isLoggedIn={isLoggedIn}
         onSignInClick={onSignInClick}
         onLogout={onLogout}
         onSearch={onSearch} />
-      {isLoading && (
+
+      {wasSearch && blockState()}
+      {/* {isLoading && (
         <Preloader />
       )}
-      {articles.length === 0 ? (
+      {(wasSearch && articles.length !== 0) ? (
         <NothingFound />
       ) : (
-        <CardList 
-          articles={articles} 
-          onSaveClick={onSaveClick} 
-          isLoggedIn={isLoggedIn} 
+        <CardList
+          articles={articles}
+          onSaveClick={onSaveClick}
+          isLoggedIn={isLoggedIn}
           savedArticles={savedArticles}
           onShowMore={onShowMore} />
-      )}
-      
+      )} */}
+
       <About />
       <Footer />
     </main>

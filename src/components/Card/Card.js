@@ -5,6 +5,25 @@ import { useState } from 'react';
 function Card({ card, isLoggedIn }) {
   const location = useLocation();
 
+  function setDateString() {
+    const date = new Date(card.publishedAt);
+    const months = [
+      'January',
+      'February',
+      'March',
+      'April',
+      'May',
+      'June',
+      'July',
+      'August',
+      'September',
+      'October',
+      'November',
+      'December'
+    ];
+    return `${months[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`
+  }
+
   return (
     <li className="card">
       <a
@@ -41,7 +60,7 @@ function Card({ card, isLoggedIn }) {
         )}
 
         <div className="card__description">
-          <p className="card__date">{card.publishedAt}</p>
+          <p className="card__date">{setDateString()}</p>
           <h3 className="card__title">{card.title}</h3>
           <p className="card__text">{card.content}</p>
           <p className="card__source">{card.source.name}</p>

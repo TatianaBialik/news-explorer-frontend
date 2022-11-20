@@ -1,17 +1,18 @@
 import './Navigation.css';
 import { useLocation, NavLink } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import logout_black from '../../images/logout_black.svg';
 import logout_white from '../../images/logout_white.svg';
+import CurrentUserContext from '../../contexts/CurrentUserContext';
 
 function Navigation({ 
-  isLoggedIn, 
-  username, 
+  isLoggedIn,
   onSignInClick, 
   onLogout }) {
   const location = useLocation();
   const navClass = location.pathname === '/' ? '' : '_saved';
   const [isBurgerButtonActive, setIsBurgerButtonActive] = useState(false);
+  const currentUser = useContext(CurrentUserContext);
 
   const handleBurgerMenuClick = () => {
     setIsBurgerButtonActive(true);
@@ -40,7 +41,7 @@ function Navigation({
               <button 
                 className={`navigation__header-button navigation__header-button_function_logout`}
                 onClick={onLogout}>
-                { username }
+                { currentUser.name }
                 <img src={ logout_white } alt='Exit icon' />
               </button>
               ) : (
@@ -69,7 +70,7 @@ function Navigation({
             <button 
               className={`navigation__header-button navigation__header-button_function_logout navigation__header-button` + navClass}
               onClick={onLogout}>
-              { username }
+              { currentUser.name }
               <img src={ location.pathname === '/' ? logout_white : logout_black } alt='Exit icon' />
             </button>
           </>

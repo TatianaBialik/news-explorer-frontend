@@ -124,12 +124,15 @@ function App() {
 
   //////////////////////////////////////
   /* SEARCH ARTICLES AND RENDER CARDS */
-  function handleSearch(keyword) {
+  const handleSearch = (keyword) => {
+    setIsLoading(true);
     search(keyword)
       .then((res) => {
-        setIsLoading(true);
+        setWasSearch(true);
         if (res.articles) {
           articles.current = res.articles;
+          // setArticles(res.articles)
+          // console.log(articles)
           setRenderedCards(articles.current.slice(0, ADDED_CARDS));
         }
       })
@@ -152,15 +155,15 @@ function App() {
             path='/' 
             element={
               <Main 
-                isLoggedIn={isLoggedIn} 
-                username={currentUser.name}
+                isLoggedIn={isLoggedIn}
                 onSignInClick={handleSignInButtonClick}
                 isLoading={isLoading}
                 articles={renderedCards}
                 onLogout={handleLogout}
                 savedArticles={savedNews}
                 onSearch={handleSearch}
-                onShowMore={handleShowMore} />
+                onShowMore={handleShowMore}
+                wasSearch={wasSearch} />
               } />
 
           {/* ONLY AUTHORIZED USERS ACCESS */}
