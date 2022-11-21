@@ -6,7 +6,8 @@ function CardList({
   isLoggedIn, 
   onSave, 
   savedArticles, 
-  onShowMore 
+  onShowMore,
+  showMoreButtonVisible
 }) {
   return (
     <section className='cardlist'>
@@ -22,7 +23,7 @@ function CardList({
         ))}
       </ul>
       <button 
-        className='cardlist__show-more-button'
+        className={`cardlist__show-more-button ${!showMoreButtonVisible && 'cardlist__show-more-button_hidden'}`}
         onClick={onShowMore}>Show more</button>
     </section>
   )

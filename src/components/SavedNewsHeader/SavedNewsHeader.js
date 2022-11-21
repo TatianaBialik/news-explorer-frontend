@@ -17,9 +17,9 @@ function SavedNewsHeader({ onLogout }) {
     //   }
     // });
     const uniqueKeywords = [...new Set(keywords)];
-    return currentUser.savedArticles.length <= 3
-      ? uniqueKeywords.join(', ') 
-      : uniqueKeywords.slice(0,2).join(', ') + ' and ' + (uniqueKeywords.length - 2) + ' more'
+    return uniqueKeywords.length <= 3
+      ? uniqueKeywords.join(', ')
+      : uniqueKeywords.slice(0, 2).join(', ') + ' and ' + (uniqueKeywords.length - 2) + ' more'
   }
 
   return (
@@ -29,12 +29,15 @@ function SavedNewsHeader({ onLogout }) {
       <div className="saved-header__info">
         <p className="saved-header__subtitle">Saved articles</p>
         <h2 className="saved-header__title">{currentUser.name}, you have {currentUser.savedArticles.length} saved articles</h2>
-        <p className="saved-header__keywords-block">
-          By keywords:{' '}
-          <span className="saved-header__keywords">
-            {makeHeaderString()}
-          </span>
-        </p>
+        {currentUser.savedArticles.length > 0 && (
+          <p className="saved-header__keywords-block">
+            By keywords:{' '}
+            <span className="saved-header__keywords">
+              {makeHeaderString()}
+            </span>
+          </p>
+        )}
+
       </div>
     </header>
   )

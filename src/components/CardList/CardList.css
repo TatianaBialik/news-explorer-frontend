@@ -41,6 +41,10 @@
   cursor: pointer;
 }
 
+.cardlist__show-more-button_hidden {
+  visibility: hidden;
+}
+
 /* HOVER EFFECT FOR BUTTON ACCORDING FIGMA LAYOUT */
 .cardlist__show-more-button:hover {
   opacity: 0.9;

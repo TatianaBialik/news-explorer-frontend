@@ -27,6 +27,7 @@ function App() {
   const [wasSearch, setWasSearch] = useState(false);
   const [currentKeyword, setCurrentKeyword] = useState('');
   const [registerError, setRegisterError] = useState(false);
+  const [showMoreButtonVisible, setShowMoreButtonVisible] = useState(true);
 
   const ADDED_CARDS = 3;
 
@@ -71,10 +72,16 @@ function App() {
       mainApi
         .getArticles(token)
         .then((res) => {
-          setCurrentUser((currentUser) => ({...currentUser, savedArticles: res}))
+          setCurrentUser((currentUser) => ({ ...currentUser, savedArticles: res }))
         })
     }
   }, [isLoggedIn]);
+
+  useEffect(() => {
+    articles.current.length > renderedCards.length
+      ? setShowMoreButtonVisible(true)
+      : setShowMoreButtonVisible(false);
+  }, [articles.current, renderedCards])
 
   ///////////////////////////////////////
   /* POPUPS STATE CHANGING: OPEN/CLOSE */
@@ -142,6 +149,8 @@ function App() {
   /* SEARCH ARTICLES AND RENDER CARDS */
   const handleSearch = (keyword) => {
     setIsLoading(true);
+    // setRenderedCards([]);
+    setShowMoreButtonVisible(true);
     setCurrentKeyword(firstLeterToUpperCase(keyword));
     search(keyword)
       .then((res) => {
@@ -161,6 +170,10 @@ function App() {
 
   function handleShowMore() {
     setRenderedCards(articles.current.slice(0, renderedCards.length + ADDED_CARDS));
+    // if (articles.current.length === renderedCards.length) {
+    //   console.log('xxx')
+    //   setShowMoreButtonVisible(false);
+    // }
   }
 
   ///////////////////////////////////////////////
@@ -169,7 +182,7 @@ function App() {
     mainApi
       .saveArticle(token, card, currentKeyword)
       .then((res) => {
-        setCurrentUser((currentUser) => ({...currentUser, savedArticles: [...currentUser.savedArticles, res]}));
+        setCurrentUser((currentUser) => ({ ...currentUser, savedArticles: [...currentUser.savedArticles, res] }));
         // setSavedNews([...savedNews, res]);
       })
       .catch((err) => console.log(err));
@@ -192,58 +205,59 @@ function App() {
   return (
     <CurrentUserContext.Provider value={currentUser}>
       {/* <SavedNewsContext.Provider value={savedNews}> */}
-        <div className="page">
-          <Routes>
-            { /* MAIN PAGE AVAILABLE FOR EACH USER */}
-            <Route
-              path='/'
-              element={
-                <Main
-                  isLoggedIn={isLoggedIn}
-                  onSignInClick={handleSignInButtonClick}
-                  isLoading={isLoading}
-                  articles={renderedCards}
-                  onLogout={handleLogout}
-                  savedArticles={savedNews}
-                  onSearch={handleSearch}
-                  onShowMore={handleShowMore}
-                  wasSearch={wasSearch}
-                  onSave={handleSave} />
-              } />
-
-            {/* ONLY AUTHORIZED USERS ACCESS */}
-            <Route path='/saved-news' element={
-              isLoggedIn ? (
-                <SavedNews
-                  // articles={savedNews}
-                  onLogout={handleLogout}
-                  // onNewsLoading={getSavedNews}
-                  onDelete={handleDelete} />
-              ) : (
-                <Navigate to='/' />
-              )
+      <div className="page">
+        <Routes>
+          { /* MAIN PAGE AVAILABLE FOR EACH USER */}
+          <Route
+            path='/'
+            element={
+              <Main
+                isLoggedIn={isLoggedIn}
+                onSignInClick={handleSignInButtonClick}
+                isLoading={isLoading}
+                articles={renderedCards}
+                onLogout={handleLogout}
+                savedArticles={savedNews}
+                onSearch={handleSearch}
+                onShowMore={handleShowMore}
+                wasSearch={wasSearch}
+                onSave={handleSave}
+                showMoreButtonVisible={showMoreButtonVisible} />
             } />
 
-            {/* REST OF PATHS A REDIRECTED TO THE MAIN PAGE */}
-            <Route path='*' element={<Navigate to='/' />} />
-          </Routes>
+          {/* ONLY AUTHORIZED USERS ACCESS */}
+          <Route path='/saved-news' element={
+            isLoggedIn ? (
+              <SavedNews
+                // articles={savedNews}
+                onLogout={handleLogout}
+                // onNewsLoading={getSavedNews}
+                onDelete={handleDelete} />
+            ) : (
+              <Navigate to='/' />
+            )
+          } />
 
-          <LoginPopup
-            isOpen={isLoginPopupOpen}
-            onClose={closeAllPopups}
-            onSignUpClick={handleSignUpClick}
-            onLogin={handleLogin} />
-          <RegisterPopup
-            isOpen={isRegisterPopupOpen}
-            onClose={closeAllPopups}
-            onSignInClick={handleSignInButtonClick}
-            onRegister={handleRegister}
-            isCommonError={registerError} />
-          <SuccessPopup
-            isOpen={isSuccessPopupOpen}
-            onClose={closeAllPopups}
-            onSignInClick={handleSignInButtonClick} />
-        </div>
+          {/* REST OF PATHS A REDIRECTED TO THE MAIN PAGE */}
+          <Route path='*' element={<Navigate to='/' />} />
+        </Routes>
+
+        <LoginPopup
+          isOpen={isLoginPopupOpen}
+          onClose={closeAllPopups}
+          onSignUpClick={handleSignUpClick}
+          onLogin={handleLogin} />
+        <RegisterPopup
+          isOpen={isRegisterPopupOpen}
+          onClose={closeAllPopups}
+          onSignInClick={handleSignInButtonClick}
+          onRegister={handleRegister}
+          isCommonError={registerError} />
+        <SuccessPopup
+          isOpen={isSuccessPopupOpen}
+          onClose={closeAllPopups}
+          onSignInClick={handleSignInButtonClick} />
+      </div>
       {/* </SavedNewsContext.Provider> */}
     </CurrentUserContext.Provider>
   )

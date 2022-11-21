@@ -15,7 +15,8 @@ function Main({
   onSearch,
   onShowMore,
   wasSearch,
-  onSave
+  onSave,
+  showMoreButtonVisible
 }) {
   const blockState = () => {
     if (isLoading) return (<Preloader />);
@@ -27,7 +28,8 @@ function Main({
       onSave={onSave}
       isLoggedIn={isLoggedIn}
       savedArticles={savedArticles}
-      onShowMore={onShowMore} />);
+      onShowMore={onShowMore}
+      showMoreButtonVisible={showMoreButtonVisible} />);
   }
 
   return (
