@@ -182,13 +182,16 @@ function App() {
     mainApi
       .saveArticle(token, card, currentKeyword)
       .then((res) => {
-        setCurrentUser((currentUser) => ({ ...currentUser, savedArticles: [...currentUser.savedArticles, res] }));
+        setCurrentUser((currentUser) => ({ 
+          ...currentUser, 
+          savedArticles: [res, ...currentUser.savedArticles] 
+        }));
         // setSavedNews([...savedNews, res]);
       })
       .catch((err) => console.log(err));
   }
 
-  const handleDelete = (card) => {
+  function handleDelete(card) {
     mainApi
       .deleteArticle(token, card)
       .then((res) => {
@@ -196,8 +199,6 @@ function App() {
           ...currentUser,
           savedArticles: currentUser.savedArticles.filter((currArticle) => currArticle._id !== card._id)
         }))
-
-        // }savedNews.filter((currArticle) => currArticle._id !== card._id))
       })
       .catch((err) => console.log(err));
   }
@@ -217,12 +218,13 @@ function App() {
                 isLoading={isLoading}
                 articles={renderedCards}
                 onLogout={handleLogout}
-                savedArticles={savedNews}
+                // savedArticles={savedNews}
                 onSearch={handleSearch}
                 onShowMore={handleShowMore}
                 wasSearch={wasSearch}
                 onSave={handleSave}
-                showMoreButtonVisible={showMoreButtonVisible} />
+                showMoreButtonVisible={showMoreButtonVisible}
+                onDelete={handleDelete} />
             } />
 
           {/* ONLY AUTHORIZED USERS ACCESS */}

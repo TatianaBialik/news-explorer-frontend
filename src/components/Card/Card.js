@@ -1,7 +1,8 @@
 import './Card.css';
 import { useLocation } from 'react-router-dom';
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect, useRef } from 'react';
 import SavedNewsContext from '../../contexts/SavedNewsContext';
+import CurrentUserContext from '../../contexts/CurrentUserContext';
 
 function Card({
   card,
@@ -10,6 +11,14 @@ function Card({
   onDelete,
   onSave }) {
   const location = useLocation();
+  const currentUser = useContext(CurrentUserContext);
+  const [isSaved, setIsSaved] = useState(false);
+  const [isHover, setIsHover] = useState(false);
+
+  useEffect(() => {
+    (currentUser.savedArticles && currentUser.savedArticles.some((article) => article.link === card.url))
+      && setIsSaved(true)
+  }, []);
 
   function setDateString() {
     const date = new Date(card.publishedAt || card.date);
@@ -30,32 +39,27 @@ function Card({
     return `${months[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`
   }
 
-  function checkIsCardSaved() {
-    savedArticles.forEach((article) => {
-      if (article.link === card.url) {
-        console.log(article);
-        return true;
-      }
-    })
-    return false;
-  }
-
-  const handleSaveClick = (e) => {
+  function handleSaveClick(e) {
     e.preventDefault();
-    // console.log(savedArticles)
-    const check = checkIsCardSaved();
-    // console.log(check)
-    console.log(checkIsCardSaved())
-    if (checkIsCardSaved()) {
-      onDelete(card);
+    setIsSaved((state) => !state);
+    if (isSaved) {
+      onDelete(currentUser.savedArticles.find((article) => article.link === card.url))
     } else {
-      onSave(card);
+      onSave(card)
     }
   }
 
   function handleDelete(e) {
     e.preventDefault();
     onDelete(card);
+  }
+
+  const handleMouseEnter = () => {
+    setIsHover(true);
+  }
+
+  const handleMouseLeave = () => {
+    setIsHover(false);
   }
 
   return (
@@ -70,8 +74,10 @@ function Card({
           src={card.urlToImage || card.image}
           alt={`The ${card.title} article illustration`} />
         {location.pathname === '/' ? (
-          <button 
-            className={`card__button card__button_type_save ${checkIsCardSaved() && 'card__button_type_saved'}`}
+          <button
+            className={`card__button card__button_type_save ${isSaved && 'card__button_type_saved'} ${(!isSaved && isHover) && 'card__button_type_hover'}`}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
             onClick={handleSaveClick} />
         ) : (
           <button

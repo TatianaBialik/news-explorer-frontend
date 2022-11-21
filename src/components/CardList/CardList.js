@@ -7,7 +7,8 @@ function CardList({
   onSave, 
   savedArticles, 
   onShowMore,
-  showMoreButtonVisible
+  showMoreButtonVisible,
+  onDelete
 }) {
   return (
     <section className='cardlist'>
@@ -19,7 +20,8 @@ function CardList({
             card={article} 
             isLoggedIn={isLoggedIn} 
             onSave={onSave}
-            savedArticles={savedArticles} />
+            savedArticles={savedArticles}
+            onDelete={onDelete} />
         ))}
       </ul>
       <button 

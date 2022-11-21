@@ -16,7 +16,8 @@ function Main({
   onShowMore,
   wasSearch,
   onSave,
-  showMoreButtonVisible
+  showMoreButtonVisible,
+  onDelete
 }) {
   const blockState = () => {
     if (isLoading) return (<Preloader />);
@@ -29,7 +30,8 @@ function Main({
       isLoggedIn={isLoggedIn}
       savedArticles={savedArticles}
       onShowMore={onShowMore}
-      showMoreButtonVisible={showMoreButtonVisible} />);
+      showMoreButtonVisible={showMoreButtonVisible}
+      onDelete={onDelete} />);
   }
 
   return (
@@ -41,20 +43,7 @@ function Main({
         onSearch={onSearch} />
 
       {wasSearch && blockState()}
-      {/* {isLoading && (
-        <Preloader />
-      )}
-      {(wasSearch && articles.length !== 0) ? (
-        <NothingFound />
-      ) : (
-        <CardList
-          articles={articles}
-          onSaveClick={onSaveClick}
-          isLoggedIn={isLoggedIn}
-          savedArticles={savedArticles}
-          onShowMore={onShowMore} />
-      )} */}
-
+      
       <About />
       <Footer />
     </main>
