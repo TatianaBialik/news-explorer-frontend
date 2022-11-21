@@ -32,16 +32,20 @@ function Card({
 
   function checkIsCardSaved() {
     savedArticles.forEach((article) => {
-      console.log('Link:' + article.link + '   URL:   ' + card.url + 'xxxxxxxxx')
-      if (article.link === card.url)
+      if (article.link === card.url) {
+        console.log(article);
         return true;
-      return false;
+      }
     })
+    return false;
   }
 
   const handleSaveClick = (e) => {
     e.preventDefault();
-    console.log(savedArticles)
+    // console.log(savedArticles)
+    const check = checkIsCardSaved();
+    // console.log(check)
+    console.log(checkIsCardSaved())
     if (checkIsCardSaved()) {
       onDelete(card);
     } else {

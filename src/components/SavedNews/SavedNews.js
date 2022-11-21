@@ -3,14 +3,13 @@ import Footer from '../Footer/Footer';
 import SavedCardsList from '../SavedCardsList/SavedCardsList';
 import { useEffect } from 'react';
 
-function SavedNews({ username, articles, onLogout, onNewsLoading, onDelete }) {
+function SavedNews({ onLogout, onNewsLoading, onDelete }) {
   return (
     <>
-      <SavedNewsHeader 
-        username={username} 
-        articles={articles} 
+      <SavedNewsHeader
+        // articles={articles} 
         onLogout={onLogout} />
-      <SavedCardsList articles={articles} onDelete={onDelete} />
+      <SavedCardsList onDelete={onDelete} />
       <Footer />
     </>
   )

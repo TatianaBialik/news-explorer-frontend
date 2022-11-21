@@ -21,7 +21,7 @@ function App() {
   // const [articles, setArticles] = useState([]);
   const articles = useRef([]);
   const [renderedCards, setRenderedCards] = useState([]);
-  const [currentUser, setCurrentUser] = useState('');
+  const [currentUser, setCurrentUser] = useState({});
   const [token, setToken] = useState(localStorage.getItem('jwt'));
   const [savedNews, setSavedNews] = useState([]);
   const [wasSearch, setWasSearch] = useState(false);
@@ -29,6 +29,10 @@ function App() {
   const [registerError, setRegisterError] = useState(false);
 
   const ADDED_CARDS = 3;
+
+  function firstLeterToUpperCase(word) {
+    return word.charAt(0).toUpperCase() + word.slice(1);
+  }
 
   // const history = useHistory();
 
@@ -53,19 +57,24 @@ function App() {
 
   /////////////////////////////////////////
   /* SAVED NEWS LOADING WHEN PAGE LOADED */
-  function getSavedNews() {
-    mainApi
-      .getArticles(token)
-      .then((res) => {
-        setSavedNews(res);
-      })
-      .catch((err) => console.log(err));
-  };
+  // function getSavedNews() {
+  //   mainApi
+  //     .getArticles(token)
+  //     .then((res) => {
+  //       setSavedNews(res);
+  //     })
+  //     .catch((err) => console.log(err));
+  // };
 
   useEffect(() => {
-    if (token)
-      getSavedNews();
-  }, []);
+    if (token) {
+      mainApi
+        .getArticles(token)
+        .then((res) => {
+          setCurrentUser((currentUser) => ({...currentUser, savedArticles: res}))
+        })
+    }
+  }, [isLoggedIn]);
 
   ///////////////////////////////////////
   /* POPUPS STATE CHANGING: OPEN/CLOSE */
@@ -133,7 +142,7 @@ function App() {
   /* SEARCH ARTICLES AND RENDER CARDS */
   const handleSearch = (keyword) => {
     setIsLoading(true);
-    setCurrentKeyword(keyword);
+    setCurrentKeyword(firstLeterToUpperCase(keyword));
     search(keyword)
       .then((res) => {
         setWasSearch(true);
@@ -160,7 +169,8 @@ function App() {
     mainApi
       .saveArticle(token, card, currentKeyword)
       .then((res) => {
-        setSavedNews([...savedNews, res]);
+        setCurrentUser((currentUser) => ({...currentUser, savedArticles: [...currentUser.savedArticles, res]}));
+        // setSavedNews([...savedNews, res]);
       })
       .catch((err) => console.log(err));
   }
@@ -169,7 +179,12 @@ function App() {
     mainApi
       .deleteArticle(token, card)
       .then((res) => {
-        setSavedNews(savedNews.filter((currArticle) => currArticle._id !== card._id))
+        setCurrentUser((currentUser) => ({
+          ...currentUser,
+          savedArticles: currentUser.savedArticles.filter((currArticle) => currArticle._id !== card._id)
+        }))
+
+        // }savedNews.filter((currArticle) => currArticle._id !== card._id))
       })
       .catch((err) => console.log(err));
   }
@@ -200,10 +215,9 @@ function App() {
             <Route path='/saved-news' element={
               isLoggedIn ? (
                 <SavedNews
-                  username={currentUser.name}
-                  articles={savedNews}
+                  // articles={savedNews}
                   onLogout={handleLogout}
-                  onNewsLoading={getSavedNews}
+                  // onNewsLoading={getSavedNews}
                   onDelete={handleDelete} />
               ) : (
                 <Navigate to='/' />

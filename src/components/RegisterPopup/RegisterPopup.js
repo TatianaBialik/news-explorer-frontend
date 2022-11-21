@@ -11,7 +11,7 @@ function RegisterPopup({
   isCommonError
 }) {
   // const {values, handleChange, setValues} = useForm({ email: '', password: '', name: '' });
-  const { values, handleChange, errors, isValid, resetForm, setValues } = useFormWithValidation();
+  const { values, handleChange, errors, isValid, resetForm, setValues } = useFormWithValidation({ email: '', password: '', name: '' });
 
   useEffect(() => {
     resetForm();
