@@ -72,10 +72,11 @@ function App() {
       mainApi
         .getArticles(token)
         .then((res) => {
-          setCurrentUser((currentUser) => ({ ...currentUser, savedArticles: res }))
+          if (res)
+            setCurrentUser((currentUser) => ({ ...currentUser, savedArticles: res }));
         })
     }
-  }, [isLoggedIn]);
+  }, [token, isLoggedIn]);
 
   useEffect(() => {
     articles.current.length > renderedCards.length
@@ -203,6 +204,10 @@ function App() {
       .catch((err) => console.log(err));
   }
 
+  function handleUnauthorizedSaveClick() {
+    setIsRegisterPopupOpen(true);
+  }
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       {/* <SavedNewsContext.Provider value={savedNews}> */}
@@ -224,7 +229,8 @@ function App() {
                 wasSearch={wasSearch}
                 onSave={handleSave}
                 showMoreButtonVisible={showMoreButtonVisible}
-                onDelete={handleDelete} />
+                onDelete={handleDelete} 
+                onUnauthorizedClick={handleUnauthorizedSaveClick} />
             } />
 
           {/* ONLY AUTHORIZED USERS ACCESS */}

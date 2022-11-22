@@ -17,7 +17,8 @@ function Main({
   wasSearch,
   onSave,
   showMoreButtonVisible,
-  onDelete
+  onDelete,
+  onUnauthorizedClick
 }) {
   const blockState = () => {
     if (isLoading) return (<Preloader />);
@@ -31,7 +32,8 @@ function Main({
       savedArticles={savedArticles}
       onShowMore={onShowMore}
       showMoreButtonVisible={showMoreButtonVisible}
-      onDelete={onDelete} />);
+      onDelete={onDelete}
+      onUnauthorizedClick={onUnauthorizedClick} />);
   }
 
   return (

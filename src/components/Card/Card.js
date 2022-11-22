@@ -9,7 +9,8 @@ function Card({
   isLoggedIn,
   savedArticles,
   onDelete,
-  onSave }) {
+  onSave,
+  onUnauthorizedClick }) {
   const location = useLocation();
   const currentUser = useContext(CurrentUserContext);
   const [isSaved, setIsSaved] = useState(false);
@@ -49,6 +50,11 @@ function Card({
     }
   }
 
+  function handleUnauthorizedSaveClick(e) {
+    e.preventDefault();
+    onUnauthorizedClick();
+  }
+
   function handleDelete(e) {
     e.preventDefault();
     onDelete(card);
@@ -78,7 +84,7 @@ function Card({
             className={`card__button card__button_type_save ${isSaved && 'card__button_type_saved'} ${(!isSaved && isHover) && 'card__button_type_hover'}`}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
-            onClick={handleSaveClick} />
+            onClick={isLoggedIn ? handleSaveClick : handleUnauthorizedSaveClick} />
         ) : (
           <button
             className="card__button card__button_type_delete"
