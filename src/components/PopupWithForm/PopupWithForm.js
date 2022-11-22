@@ -30,18 +30,23 @@ function PopupWithForm({
 
   return (
     <Popup isOpen={isOpen} name={name} onClose={onClose}>
-      <form 
+      <form
         className="form"
         onSubmit={handleSubmit}>
         {children}
-        <button type='submit' className={`form__submit-button ${!isValid && 'form__submit-button_disable'}`} disabled={!isValid}>{name}</button>
+        <button
+          type='submit'
+          className={`form__submit-button ${!isValid && 'form__submit-button_disable'}`}
+          disabled={!isValid}>
+          {name}
+        </button>
       </form>
       <p className="form__subtext">
         or&nbsp;
-        <NavLink 
-          className="form__link" 
+        <NavLink
+          className="form__link"
           onClick={name === 'Sign in' ? handleSignUpClick : handleSignInClick}>
-            {name === 'Sign in' ? 'Sign up' : 'Sign in'}
+          {name === 'Sign in' ? 'Sign up' : 'Sign in'}
         </NavLink>
       </p>
     </Popup>

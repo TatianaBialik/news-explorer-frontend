@@ -14,31 +14,26 @@ import search from '../../utils/NewsApi';
 
 import CurrentUserContext from '../../contexts/CurrentUserContext';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
+import { ADDED_CARDS } from '../../utils/constants';
 
 function App() {
+  //Popups states
   const [isLoginPopupOpen, setIsLoginPopupOpen] = useState(false);
   const [isRegisterPopupOpen, setIsRegisterPopupOpen] = useState(false);
   const [isSuccessPopupOpen, setIsSuccessPopupOpen] = useState(false);
+  //Login and user states
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-  // const [articles, setArticles] = useState([]);
-  const articles = useRef([]);
-  const [renderedCards, setRenderedCards] = useState([]);
   const [currentUser, setCurrentUser] = useState({});
   const [token, setToken] = useState(localStorage.getItem('jwt'));
-  const [savedNews, setSavedNews] = useState([]);
+  //News states
+  const [isLoading, setIsLoading] = useState(false);
+  const articles = useRef([]);
+  const [renderedCards, setRenderedCards] = useState([]);
   const [wasSearch, setWasSearch] = useState(false);
   const [currentKeyword, setCurrentKeyword] = useState('');
-  const [registerError, setRegisterError] = useState(false);
   const [showMoreButtonVisible, setShowMoreButtonVisible] = useState(true);
 
-  const ADDED_CARDS = 3;
-
-  function firstLeterToUpperCase(word) {
-    return word.charAt(0).toUpperCase() + word.slice(1);
-  }
-
-  // const history = useHistory();
+  const [registerError, setRegisterError] = useState(false);
 
   /////////////////////////////////////////////////////////////////
   /* CHECKING TOKEN WHEN THE RESOURSE IS LOADED/TOKEN IS CHANGED */
@@ -59,17 +54,8 @@ function App() {
     };
   }, [token]);
 
-  /////////////////////////////////////////
-  /* SAVED NEWS LOADING WHEN PAGE LOADED */
-  // function getSavedNews() {
-  //   mainApi
-  //     .getArticles(token)
-  //     .then((res) => {
-  //       setSavedNews(res);
-  //     })
-  //     .catch((err) => console.log(err));
-  // };
-
+  /////////////////////////////////////////////
+  /* LOADING SAVED NEWS FOR AUTHORIZED USER */
   useEffect(() => {
     if (token) {
       mainApi
@@ -81,6 +67,8 @@ function App() {
     }
   }, [token, isLoggedIn]);
 
+  //////////////////////////////////////
+  /* SET SHOW MORE BUTTON VISIBILITY */
   useEffect(() => {
     articles.current.length > renderedCards.length
       ? setShowMoreButtonVisible(true)
@@ -105,7 +93,7 @@ function App() {
   }
 
   ///////////////////////////////////////////////////////////
-  /* AUTHORIZATION: REGISTER, LOGIN/LOGOUT, TOKEN CHECKING */
+  /* AUTHORIZATION: REGISTER, LOGIN/LOGOUT */
   function handleRegister({ email, password, name }) {
     mainApi
       .register(email, password, name)
@@ -148,11 +136,16 @@ function App() {
     setIsLoginPopupOpen(true);
   };
 
+  //////////////////////////
+  /* TO FORMAT A KEYWORD */
+  function firstLeterToUpperCase(word) {
+    return word.charAt(0).toUpperCase() + word.slice(1);
+  }
+
   //////////////////////////////////////
   /* SEARCH ARTICLES AND RENDER CARDS */
   const handleSearch = (keyword) => {
     setIsLoading(true);
-    // setRenderedCards([]);
     setShowMoreButtonVisible(true);
     setCurrentKeyword(firstLeterToUpperCase(keyword));
     search(keyword)
@@ -160,8 +153,6 @@ function App() {
         setWasSearch(true);
         if (res.articles) {
           articles.current = res.articles;
-          // setArticles(res.articles)
-          // console.log(articles)
           setRenderedCards(articles.current.slice(0, ADDED_CARDS));
         }
       })
@@ -173,10 +164,6 @@ function App() {
 
   function handleShowMore() {
     setRenderedCards(articles.current.slice(0, renderedCards.length + ADDED_CARDS));
-    // if (articles.current.length === renderedCards.length) {
-    //   console.log('xxx')
-    //   setShowMoreButtonVisible(false);
-    // }
   }
 
   ///////////////////////////////////////////////
@@ -189,7 +176,6 @@ function App() {
           ...currentUser,
           savedArticles: [res, ...currentUser.savedArticles]
         }));
-        // setSavedNews([...savedNews, res]);
       })
       .catch((err) => console.log(err));
   }
@@ -224,7 +210,6 @@ function App() {
                 isLoading={isLoading}
                 articles={renderedCards}
                 onLogout={handleLogout}
-                // savedArticles={savedNews}
                 onSearch={handleSearch}
                 onShowMore={handleShowMore}
                 wasSearch={wasSearch}

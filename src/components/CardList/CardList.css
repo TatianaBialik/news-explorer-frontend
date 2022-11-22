@@ -49,6 +49,12 @@
   opacity: 0.9;
 }
 
+@media screen and (max-width: 1350px) {
+  .cardlist {
+    padding: 80px;
+  }
+}
+
 @media screen and (max-width: 992px) {
   .cardlist {
     padding: 40px;

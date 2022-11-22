@@ -1,5 +1,4 @@
 import PopupWithForm from '../PopupWithForm/PopupWithForm';
-import useForm from '../../utils/useForm';
 import { useEffect } from 'react';
 import useFormWithValidation from '../../utils/useFormWithValidation';
 
@@ -10,7 +9,6 @@ function RegisterPopup({
   onRegister,
   isCommonError
 }) {
-  // const {values, handleChange, setValues} = useForm({ email: '', password: '', name: '' });
   const { values, handleChange, errors, isValid, resetForm, setValues } = useFormWithValidation({ email: '', password: '', name: '' });
 
   useEffect(() => {

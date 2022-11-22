@@ -125,11 +125,8 @@
 
 @media screen and (max-width: 319px) {
   .about__photo-wrapper {
-    /* width: 200px;
-    height: 200px; */
     max-width: 200px;
     max-height: 200px;
-    /* max-height: 90%; */
   }
 
   .about__photo {

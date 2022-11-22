@@ -39,11 +39,6 @@
   background-color: #FFFFFF;
 }
 
-/* .card__button_type_save:hover {
-  background: url('../../images/bookmark_hover.svg') no-repeat center;
-  background-color: #FFFFFF;
-} */
-
 .card__button_type_hover {
   background: url('../../images/bookmark_hover.svg') no-repeat center;
   background-color: #FFFFFF;

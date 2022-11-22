@@ -1,12 +1,11 @@
 import './Card.css';
 import { useLocation } from 'react-router-dom';
-import { useState, useContext, useEffect, useRef } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
 
 function Card({
   card,
   isLoggedIn,
-  savedArticles,
   onDelete,
   onSave,
   onUnauthorizedClick }) {
