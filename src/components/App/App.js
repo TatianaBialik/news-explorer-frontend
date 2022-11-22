@@ -1,16 +1,19 @@
+//React
 import { useState, useEffect, useRef } from 'react';
-import { Route, Routes, Redirect, useHistory, Navigate } from 'react-router-dom';
-
+import { Route, Routes, Navigate } from 'react-router-dom';
+//Elements
 import Main from '../Main/Main';
+import SavedNews from '../SavedNews/SavedNews';
+//Popups
 import LoginPopup from '../LoginPopup/LoginPopup';
 import RegisterPopup from '../RegisterPopup/RegisterPopup';
 import SuccessPopup from '../SuccessPopup/SuccessPopup';
-import SavedNews from '../SavedNews/SavedNews';
-import { cards } from '../../utils/temp_consts';
+//API
 import * as mainApi from '../../utils/MainApi';
-import CurrentUserContext from '../../contexts/CurrentUserContext';
-import SavedNewsContext from '../../contexts/SavedNewsContext';
 import search from '../../utils/NewsApi';
+
+import CurrentUserContext from '../../contexts/CurrentUserContext';
+import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
 function App() {
   const [isLoginPopupOpen, setIsLoginPopupOpen] = useState(false);
@@ -143,7 +146,6 @@ function App() {
     localStorage.removeItem('jwt');
     setToken('');
     setIsLoginPopupOpen(true);
-    // history.push('/');
   };
 
   //////////////////////////////////////
@@ -183,9 +185,9 @@ function App() {
     mainApi
       .saveArticle(token, card, currentKeyword)
       .then((res) => {
-        setCurrentUser((currentUser) => ({ 
-          ...currentUser, 
-          savedArticles: [res, ...currentUser.savedArticles] 
+        setCurrentUser((currentUser) => ({
+          ...currentUser,
+          savedArticles: [res, ...currentUser.savedArticles]
         }));
         // setSavedNews([...savedNews, res]);
       })
@@ -210,7 +212,6 @@ function App() {
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
-      {/* <SavedNewsContext.Provider value={savedNews}> */}
       <div className="page">
         <Routes>
           { /* MAIN PAGE AVAILABLE FOR EACH USER */}
@@ -229,22 +230,20 @@ function App() {
                 wasSearch={wasSearch}
                 onSave={handleSave}
                 showMoreButtonVisible={showMoreButtonVisible}
-                onDelete={handleDelete} 
+                onDelete={handleDelete}
                 onUnauthorizedClick={handleUnauthorizedSaveClick} />
             } />
 
           {/* ONLY AUTHORIZED USERS ACCESS */}
-          <Route path='/saved-news' element={
-            isLoggedIn ? (
-              <SavedNews
-                // articles={savedNews}
-                onLogout={handleLogout}
-                // onNewsLoading={getSavedNews}
-                onDelete={handleDelete} />
-            ) : (
-              <Navigate to='/' />
-            )
-          } />
+          <Route
+            path='/saved-news'
+            element={
+              <ProtectedRoute isLoggedIn={isLoggedIn}>
+                <SavedNews
+                  onLogout={handleLogout}
+                  onDelete={handleDelete} />
+              </ProtectedRoute>
+            } />
 
           {/* REST OF PATHS A REDIRECTED TO THE MAIN PAGE */}
           <Route path='*' element={<Navigate to='/' />} />
@@ -266,7 +265,6 @@ function App() {
           onClose={closeAllPopups}
           onSignInClick={handleSignInButtonClick} />
       </div>
-      {/* </SavedNewsContext.Provider> */}
     </CurrentUserContext.Provider>
   )
 }

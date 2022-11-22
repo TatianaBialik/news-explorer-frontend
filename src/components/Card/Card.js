@@ -1,7 +1,6 @@
 import './Card.css';
 import { useLocation } from 'react-router-dom';
 import { useState, useContext, useEffect, useRef } from 'react';
-import SavedNewsContext from '../../contexts/SavedNewsContext';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
 
 function Card({
