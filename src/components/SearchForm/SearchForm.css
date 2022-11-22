@@ -74,3 +74,9 @@
     padding: 16px auto;
   }
 }
+
+@media screen and (max-width: 319px) {
+  .search-form {
+    max-width: 95%;
+  }
+}

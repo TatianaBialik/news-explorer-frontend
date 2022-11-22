@@ -20,7 +20,7 @@
   padding: 0;
   display: grid;
   grid-template-columns: repeat(3,1fr);
-  grid-auto-rows: minmax(576px, auto);
+  grid-auto-rows: minmax(620px, auto);
   column-gap: 16px;
   row-gap: 16px;
 }
@@ -45,7 +45,6 @@
   visibility: hidden;
 }
 
-/* HOVER EFFECT FOR BUTTON ACCORDING FIGMA LAYOUT */
 .cardlist__show-more-button:hover {
   opacity: 0.9;
 }
@@ -58,7 +57,7 @@
   .cardlist__list {
     column-gap: 8px;
     row-gap: 8px;
-    grid-auto-rows: minmax(420px, auto);
+    grid-auto-rows: minmax(496px, auto);
   }
 }
 

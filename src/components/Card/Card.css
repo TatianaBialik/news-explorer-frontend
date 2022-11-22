@@ -194,7 +194,7 @@
 
 @media screen and (max-width: 600px) {
   .card {
-    max-width: 80%;
+    width: 80%;
     margin: 0 auto;
     align-self: flex-start;
   }
@@ -220,6 +220,6 @@
 
 @media screen and (max-width: 320px) {
   .card {
-    max-width: 100%;
+    width: 100%;
   }  
 }

@@ -1,5 +1,6 @@
 import './CardList.css';
 import Card from '../Card/Card';
+import { v4 as uuid } from 'uuid';
 
 function CardList({ 
   articles, 
@@ -16,7 +17,7 @@ function CardList({
       <ul className="cardlist__list">
         {articles.map((article, i) => (
           <Card 
-            key={i} 
+            key={uuid()} 
             card={article} 
             isLoggedIn={isLoggedIn} 
             onSave={onSave}
