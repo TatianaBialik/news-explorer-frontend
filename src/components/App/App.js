@@ -47,7 +47,6 @@ function App() {
             setIsLoggedIn(true);
           } else {
             localStorage.removeItem('jwt')
-            console.log(res);
           }
         })
         .catch((err) => console.log(err));
@@ -57,7 +56,7 @@ function App() {
   /////////////////////////////////////////////
   /* LOADING SAVED NEWS FOR AUTHORIZED USER */
   useEffect(() => {
-    if (token) {
+    if (isLoggedIn) {
       mainApi
         .getArticles(token)
         .then((res) => {
@@ -65,7 +64,7 @@ function App() {
             setCurrentUser((currentUser) => ({ ...currentUser, savedArticles: res }));
         })
     }
-  }, [token, isLoggedIn]);
+  }, [isLoggedIn]);
 
   //////////////////////////////////////
   /* SET SHOW MORE BUTTON VISIBILITY */
@@ -92,7 +91,7 @@ function App() {
     setIsSuccessPopupOpen(false);
   }
 
-  ///////////////////////////////////////////////////////////
+  ////////////////////////////////////////////
   /* AUTHORIZATION: REGISTER, LOGIN/LOGOUT */
   function handleRegister({ email, password, name }) {
     mainApi
@@ -130,7 +129,7 @@ function App() {
 
   function handleLogout() {
     setIsLoggedIn(false);
-    setCurrentUser('');
+    setCurrentUser({});
     localStorage.removeItem('jwt');
     setToken('');
     setIsLoginPopupOpen(true);

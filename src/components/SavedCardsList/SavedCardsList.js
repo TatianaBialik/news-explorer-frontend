@@ -8,11 +8,14 @@ function SavedCardsList({ onDelete }) {
     <section className="cardlist">
       <ul className="cardlist__list">
         {currentUser.savedArticles && currentUser.savedArticles.map((article, i) => (
-          <Card card={article} key={article._id} onDelete={onDelete} />
+          <Card
+            card={article}
+            key={article._id}
+            onDelete={onDelete} />
         ))}
       </ul>
     </section>
-    
+
   )
 };
 

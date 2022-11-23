@@ -35,15 +35,17 @@ function Navigation({
 
           <div className="navigation__links_active">
             <NavLink to='/' className='navigation__link'>Home</NavLink>
-            <NavLink to='/saved-news' className='navigation__link'>Saved articles</NavLink>
 
             {isLoggedIn ? (
-              <button
-                className={`navigation__header-button navigation__header-button_function_logout`}
-                onClick={onLogout}>
-                {currentUser.name}
-                <img src={logout_white} alt='Exit icon' />
-              </button>
+              <>
+                <NavLink to='/saved-news' className='navigation__link'>Saved articles</NavLink>
+                <button
+                  className={`navigation__header-button navigation__header-button_function_logout`}
+                  onClick={onLogout}>
+                  {currentUser.name}
+                  <img src={logout_white} alt='Exit icon' />
+                </button>
+              </>
             ) : (
               <button
                 type='button'

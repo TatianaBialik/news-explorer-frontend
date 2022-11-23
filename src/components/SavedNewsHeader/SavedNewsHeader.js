@@ -70,7 +70,7 @@ function SavedNewsHeader({ onLogout }) {
 
       <div className="saved-header__info">
         <p className="saved-header__subtitle">Saved articles</p>
-        <h2 className="saved-header__title">{currentUser.name}, you have {currentUser.savedArticles && currentUser.savedArticles.length} saved articles</h2>
+        <h2 className="saved-header__title">{currentUser.name}, you have {currentUser.savedArticles.length} saved articles</h2>
         {currentUser.savedArticles.length > 0 && (
           <p className="saved-header__keywords-block">
             By keywords:{' '}
