@@ -20,7 +20,7 @@ function Footer() {
         </div>
         <div className="footer__external-resources">
           <a 
-            href="https://github.com/TatianaBialik" 
+            href="https://github.com/TatianaBialik/news-explorer-frontend" 
             className="footer__github" 
             target='_blank' 
             rel="noopener noreferrer">

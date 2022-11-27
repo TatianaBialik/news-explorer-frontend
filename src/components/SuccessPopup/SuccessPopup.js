@@ -8,7 +8,10 @@ function SuccessPopup({ isOpen, onClose, onSignInClick }) {
   }
 
   return (
-    <Popup name='Registration successfully completed!' isOpen={ isOpen } onClose={onClose}>
+    <Popup
+      name='Registration successfully completed!'
+      isOpen={isOpen}
+      onClose={onClose}>
       <NavLink className='form__link' onClick={handleSignInClick}>Sign in</NavLink>
     </Popup>
   )

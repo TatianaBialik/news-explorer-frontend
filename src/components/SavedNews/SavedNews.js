@@ -2,11 +2,12 @@ import SavedNewsHeader from '../SavedNewsHeader/SavedNewsHeader';
 import Footer from '../Footer/Footer';
 import SavedCardsList from '../SavedCardsList/SavedCardsList';
 
-function SavedNews({ username, articles }) {
+function SavedNews({ onLogout, onNewsLoading, onDelete }) {
   return (
     <>
-      <SavedNewsHeader username={username} articles={articles} />
-      <SavedCardsList articles={ articles } />
+      <SavedNewsHeader
+        onLogout={onLogout} />
+      <SavedCardsList onDelete={onDelete} />
       <Footer />
     </>
   )

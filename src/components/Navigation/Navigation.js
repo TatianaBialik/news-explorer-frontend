@@ -1,13 +1,18 @@
 import './Navigation.css';
 import { useLocation, NavLink } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import logout_black from '../../images/logout_black.svg';
 import logout_white from '../../images/logout_white.svg';
+import CurrentUserContext from '../../contexts/CurrentUserContext';
 
-function Navigation({ isLoggedIn, username, onSignInClick }) {
+function Navigation({
+  isLoggedIn,
+  onSignInClick,
+  onLogout }) {
   const location = useLocation();
   const navClass = location.pathname === '/' ? '' : '_saved';
   const [isBurgerButtonActive, setIsBurgerButtonActive] = useState(false);
+  const currentUser = useContext(CurrentUserContext);
 
   const handleBurgerMenuClick = () => {
     setIsBurgerButtonActive(true);
@@ -21,32 +26,36 @@ function Navigation({ isLoggedIn, username, onSignInClick }) {
     <div className="navigation">
       {/* MOBILE NAVIGATION MENU */}
       {isBurgerButtonActive ? (
-        /* OPEN MOBILE NAVIGATION MENU */
+        /* OPENED MOBILE NAVIGATION MENU */
         <div className="navigation__burger">
           <div className="navigation__top">
             <p className={`navigation__logo`}>NewsExplorer</p>
             <button className="navigation__close-menu-button" onClick={handleCloseMenuClick} />
           </div>
-          
+
           <div className="navigation__links_active">
             <NavLink to='/' className='navigation__link'>Home</NavLink>
-            <NavLink to='/saved-news' className='navigation__link'>Saved articles</NavLink>
 
-            { isLoggedIn ? (
-              <button className={`navigation__header-button navigation__header-button_function_logout`}>
-                { username }
-                <img src={ logout_white } alt='Exit icon' />
-              </button>
-              ) : (
-                <button 
-                  type='button'
-                  className={`navigation__header-button navigation__header-button_function_login`}
-                  onClick={onSignInClick}>Sign in</button>
-              )}
+            {isLoggedIn ? (
+              <>
+                <NavLink to='/saved-news' className='navigation__link'>Saved articles</NavLink>
+                <button
+                  className={`navigation__header-button navigation__header-button_function_logout`}
+                  onClick={onLogout}>
+                  {currentUser.name}
+                  <img src={logout_white} alt='Exit icon' />
+                </button>
+              </>
+            ) : (
+              <button
+                type='button'
+                className={`navigation__header-button navigation__header-button_function_login`}
+                onClick={onSignInClick}>Sign in</button>
+            )}
           </div>
         </div>
       ) : (
-        /* CLOSE MOBILE NAVIGATION MENU (BURGER) */
+        /* CLOSED MOBILE NAVIGATION MENU (BURGER) */
         <>
           <p className={`navigation__logo navigation__logo` + navClass}>NewsExplorer</p>
           <button className={`navigation__burger-menu navigation__burger-menu` + navClass} onClick={handleBurgerMenuClick} />
@@ -55,21 +64,33 @@ function Navigation({ isLoggedIn, username, onSignInClick }) {
 
       {/* REGULAR NAVIGATION MENU */}
       <nav className="navigation__links">
-        <NavLink to='/' className={`${navClass === '' && 'navigation__link_location'} navigation__link navigation__link` + navClass}>Home</NavLink>
-        
-        { isLoggedIn ? (
+        <NavLink
+          to='/'
+          className={`${navClass === '' && 'navigation__link_location'} navigation__link navigation__link` + navClass}>
+          Home
+        </NavLink>
+
+        {isLoggedIn ? (
           <>
-            <NavLink to='/saved-news' className={`${navClass === '_saved' && 'navigation__link_location'} navigation__link navigation__link` + navClass}>Saved articles</NavLink>
-            <button className={`navigation__header-button navigation__header-button_function_logout navigation__header-button` + navClass}>
-              { username }
-              <img src={ location.pathname === '/' ? logout_white : logout_black } alt='Exit icon' />
+            <NavLink
+              to='/saved-news'
+              className={`${navClass === '_saved' && 'navigation__link_location'} navigation__link navigation__link` + navClass}>
+              Saved articles
+            </NavLink>
+            <button
+              className={`navigation__header-button navigation__header-button_function_logout navigation__header-button` + navClass}
+              onClick={onLogout}>
+              {currentUser.name}
+              <img
+                src={location.pathname === '/' ? logout_white : logout_black}
+                alt='Exit icon' />
             </button>
           </>
         ) : (
-          <button 
-          type='button'
-          className={`navigation__header-button navigation__header-button_function_login navigation__header-button` + navClass}
-          onClick={onSignInClick}>Sign in</button>
+          <button
+            type='button'
+            className={`navigation__header-button navigation__header-button_function_login navigation__header-button` + navClass}
+            onClick={onSignInClick}>Sign in</button>
         )}
       </nav>
     </div>

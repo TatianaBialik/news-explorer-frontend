@@ -5,6 +5,12 @@
   position: relative;
 }
 
+.card__link {
+  text-decoration: none;
+  margin: 0;
+  padding: 0;
+}
+
 .card__image {
   border-radius: 10px 10px 0 0;
   display: block;
@@ -33,7 +39,7 @@
   background-color: #FFFFFF;
 }
 
-.card__button_type_save:hover {
+.card__button_type_hover {
   background: url('../../images/bookmark_hover.svg') no-repeat center;
   background-color: #FFFFFF;
 }
@@ -97,6 +103,7 @@
   font-weight: 500;
   font-size: 12px;
   line-height: 1.2;
+  color: #000;
 }
 
 .card__description {
@@ -122,6 +129,10 @@
   font-size: 26px;
   line-height: 1.1;
   color: #1A1B22;
+  -webkit-line-clamp: 3;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .card__text {
@@ -178,7 +189,7 @@
 
 @media screen and (max-width: 600px) {
   .card {
-    max-width: 80%;
+    width: 80%;
     margin: 0 auto;
     align-self: flex-start;
   }
@@ -204,6 +215,6 @@
 
 @media screen and (max-width: 320px) {
   .card {
-    max-width: 100%;
+    width: 100%;
   }  
 }

@@ -122,3 +122,15 @@
     margin-bottom: 16px;
   }
 }
+
+@media screen and (max-width: 319px) {
+  .about__photo-wrapper {
+    max-width: 200px;
+    max-height: 200px;
+  }
+
+  .about__photo {
+    min-width: 100%;
+    min-height: 100%;
+  }
+}

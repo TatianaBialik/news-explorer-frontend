@@ -8,7 +8,9 @@ function PopupWithForm({
   isOpen,
   onClose,
   onSignInClick,
-  onSignUpClick
+  onSignUpClick,
+  onSubmit,
+  isValid
 }) {
 
   const handleSignInClick = () => {
@@ -21,19 +23,30 @@ function PopupWithForm({
     onSignUpClick();
   }
 
+  function handleSubmit(e) {
+    e.preventDefault();
+    onSubmit();
+  }
+
   return (
     <Popup isOpen={isOpen} name={name} onClose={onClose}>
-      <form className="form">
+      <form
+        className="form"
+        onSubmit={handleSubmit}>
         {children}
-        <span className="form__error form__error_common">ppp</span>
-        <button className="form__submit-button">{name}</button>
+        <button
+          type='submit'
+          className={`form__submit-button ${!isValid && 'form__submit-button_disable'}`}
+          disabled={!isValid}>
+          {name}
+        </button>
       </form>
       <p className="form__subtext">
         or&nbsp;
-        <NavLink 
-          className="form__link" 
+        <NavLink
+          className="form__link"
           onClick={name === 'Sign in' ? handleSignUpClick : handleSignInClick}>
-            {name === 'Sign in' ? 'Sign up' : 'Sign in'}
+          {name === 'Sign in' ? 'Sign up' : 'Sign in'}
         </NavLink>
       </p>
     </Popup>
