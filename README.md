@@ -17,9 +17,10 @@ This repo contains frontend part of News Explorer project. The application is us
 ## Screenshots
 
 Main page
+
 ![Main page](https://github.com/TatianaBialik/news-explorer-frontend/blob/main/screenshots/the%20whole%20page.png)
 
 ## Links
 
-[API repo](https://github.com/TatianaBialik/news-explorer-api)
-[Deployed on GCP demo version](https://www.my-news-explorer.students.nomoredomainssbs.ru/)
+* [API repo](https://github.com/TatianaBialik/news-explorer-api)
+* [Deployed on GCP demo version](https://www.my-news-explorer.students.nomoredomainssbs.ru/)
