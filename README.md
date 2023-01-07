@@ -20,6 +20,10 @@ Main page
 
 ![Main page](https://github.com/TatianaBialik/news-explorer-frontend/blob/main/screenshots/the%20whole%20page.png)
 
+Header for authorized user
+
+![Authorized header](https://github.com/TatianaBialik/news-explorer-frontend/blob/main/screenshots/authorized%20header.png)
+
 Sign in modal window
 
 ![Sign in](https://github.com/TatianaBialik/news-explorer-frontend/blob/main/screenshots/sign%20in.png)
